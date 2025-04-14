@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e1e7f8da81869b246b0f1fec6f714ef9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/Pure_Common/Scripts/Editor/BK_EnvironmentManagerEditor.cs
+  uploadId: 744931

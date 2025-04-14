@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c7510ffe2c5739d489cfb23aea42a3aa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/Pure_Common/Scripts/Editor/BK_MaterialReplacer.cs
+  uploadId: 744931

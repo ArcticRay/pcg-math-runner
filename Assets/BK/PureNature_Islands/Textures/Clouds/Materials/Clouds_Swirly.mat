@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Clouds_Swirly
+  m_Shader: {fileID: 4800000, guid: 1bc5bad13b791ee43ab71ffca23989fa, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _GAMMALINEAR_GAMMA
+  - _KEYWORD0_KEY0
+  - _KEYWORD0_ON
+  - _USEFOGCOLOR_ON
+  - _USEFOG_ON
+  - _USESECONDNOISE_ON
+  - _VERTEXCOLORCHANNEL_RGBA
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Noise01:
+        m_Texture: {fileID: 2800000, guid: 1547a26fc0f346ddad52d856cd9152d0, type: 3}
+        m_Scale: {x: 0.5, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise02:
+        m_Texture: {fileID: 2800000, guid: 1547a26fc0f346ddad52d856cd9152d0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 6162b6fa7e834d4c934458e917fa47ca, type: 3}
+        m_Scale: {x: 6, y: 6}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 2800000, guid: 9adbe00a3419c6b479c8689ded8fb4ad, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Coverage: 0.75
+    - _DistortionPower: 0.007
+    - _Float0: 0.01
+    - _Noise01Power: 1
+    - _Noise02Power: 1
+    - _ScatteringPower: 3.3
+    - _Softness: 1
+    - _Tiling01: 0.5
+    - _Tiling02: 1
+    - _UseFog: 1
+    - _ViewDistance: 10000
+    - __dirty: 0
+    - _cloudsHeight: 194.37
+    - _cloudsPosition: 800
+    m_Colors:
+    - _CloudsColor: {r: 0.6194968, g: 0.8866587, b: 1, a: 1}
+    - _DirectionSpeed: {r: -20, g: 11.2, b: 0, a: 31}
+    - _ScatteringColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

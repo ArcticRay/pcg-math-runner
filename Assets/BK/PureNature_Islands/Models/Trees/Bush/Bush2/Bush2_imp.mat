@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bush2_imp
+  m_Shader: {fileID: 4800000, guid: 036403ed07a8e3f46a1d1815461e168d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _HIDESIDES_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ColorVariationNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Diffuse:
+        m_Texture: {fileID: 2800000, guid: b54146d5b1fe425d873e00ef14f75bd4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: c8d7e3440eb64de28c123ead2a4e6632, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 0ae8e1486a14488bbd2ea3025d9d9a2d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorVariationPower: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _GradientFalloff: 2
+    - _GradientPosition: 0
+    - _HidePower: 3.5
+    - _HideSides: 1
+    - _InvertGradient: 0
+    - _NoiseScale: 0.02
+    - _NormalPower: 1
+    - _TransAmbient: 0.2
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0.1
+    - _TransScattering: 2
+    - _TransShadow: 0.9
+    - _Translucency: 1
+    - _VertexOcclusionPower: 0
+    - _WindMultiplier: 1
+    - _WindTrunkContrast: 10
+    - _WindTrunkPosition: 0
+    - __dirty: 1
+    m_Colors:
+    - _ColorVariation: {r: 0.27471775, g: 0.42452827, b: 0.12281946, a: 1}
+    - _GradientColor: {r: 0.32809454, g: 0.7924528, b: 0, a: 1}
+    - _MainColor: {r: 0.2505694, g: 0.4716981, b: 0.15871596, a: 1}
+  m_BuildTextureStacks: []

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 947355c823b272d489f36561db5960f5
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/Pure_Common/Shaders/BK_Grass.shader
+  uploadId: 744931

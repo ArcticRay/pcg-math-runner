@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Pandanace2_imp
+  m_Shader: {fileID: 4800000, guid: 036403ed07a8e3f46a1d1815461e168d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _HIDESIDES_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ColorVariationNoise:
+        m_Texture: {fileID: 2800000, guid: a39e0aa95a4f4e889efc6d1c14f852ab, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Diffuse:
+        m_Texture: {fileID: 2800000, guid: 228a2bc55e584f55ac97d8d2f80a940c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: cce83fe87c304b2ab967521e7a21b5d5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: d405fab5bedb4e38906754d5f8e0127d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorVariationPower: 1
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _Float0: 0
+    - _GradientFalloff: 2
+    - _GradientPosition: 0.626
+    - _HidePower: 2.5
+    - _HideSides: 1
+    - _InvertGradient: 0
+    - _NoiseScale: 0.05
+    - _NormalPower: 1
+    - _TransAmbient: 0.2
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0.1
+    - _TransScattering: 2
+    - _TransShadow: 0.9
+    - _Translucency: 1
+    - _VertexOcclusionPower: 0
+    - _WindMultiplier: 1
+    - _WindTrunkContrast: 10
+    - _WindTrunkPosition: 0
+    - __dirty: 1
+    m_Colors:
+    - _ColorVariation: {r: 0.3570498, g: 0.490196, b: 0, a: 1}
+    - _GradientColor: {r: 0.8584906, g: 0.753511, b: 0.1349827, a: 1}
+    - _MainColor: {r: 0.45429444, g: 0.6886792, b: 0.14726463, a: 1}
+  m_BuildTextureStacks: []

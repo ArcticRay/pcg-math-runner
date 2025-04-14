@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1bc5bad13b791ee43ab71ffca23989fa
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/Pure_Common/Shaders/BK_Clouds.shader
+  uploadId: 744931
