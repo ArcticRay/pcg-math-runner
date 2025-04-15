@@ -44,11 +44,25 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _ColorVariationPower: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _EnvironmentReflections: 1
     - _Float0: 0
     - _GradientFalloff: 2
     - _GradientPosition: 0.626
@@ -57,11 +71,17 @@ Material:
     - _InvertGradient: 0
     - _NoiseScale: 0.05
     - _NormalPower: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _SpecularHighlights: 1
     - _TransAmbient: 0.2
     - _TransDirect: 1
+    - _TransNormal: 0.5
     - _TransNormalDistortion: 0.1
     - _TransScattering: 2
     - _TransShadow: 0.9
+    - _TransStrength: 1
     - _Translucency: 1
     - _VertexOcclusionPower: 0
     - _WindMultiplier: 1
@@ -70,6 +90,7 @@ Material:
     - __dirty: 1
     m_Colors:
     - _ColorVariation: {r: 0.3570498, g: 0.490196, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GradientColor: {r: 0.8584906, g: 0.753511, b: 0.1349827, a: 1}
     - _MainColor: {r: 0.45429444, g: 0.6886792, b: 0.14726463, a: 1}
   m_BuildTextureStacks: []

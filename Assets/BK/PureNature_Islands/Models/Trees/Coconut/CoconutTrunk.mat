@@ -99,9 +99,22 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _2ndNormalPower: 1
+    - _AlphaCutoff: 0.5
     - _BaseWindChannel: 0
     - _BlendNormals: 1
     - _BumpScale: 1
@@ -115,6 +128,7 @@ Material:
     - _DepositThreshold: 50
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _Float1: 6.38
     - _Float2: 0
     - _GlobalNoiseAmplitude: 1
@@ -146,6 +160,9 @@ Material:
     - _Parallax: 0.02
     - _PosContrast: 10
     - _Position: 6.2
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SeeVertexColor: 0
     - _SeeVertexColor1: 0
     - _SmoothnessPower: 0.058

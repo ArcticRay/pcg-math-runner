@@ -50,13 +50,29 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _Coverage: 0.628
     - _DistortionPower: 0.0031
     - _Float0: 0.01
     - _Noise01Power: 1
     - _Noise02Power: 0.576
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _ScatteringPower: 2
     - _Softness: 1
     - _Tiling01: 0.25
@@ -69,5 +85,7 @@ Material:
     m_Colors:
     - _CloudsColor: {r: 0.37732878, g: 0.6339269, b: 0.745283, a: 1}
     - _DirectionSpeed: {r: -50, g: 15, b: 0, a: 60}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _ScatteringColor: {r: 0.3651679, g: 0.50764644, b: 0.5582182, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

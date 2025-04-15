@@ -2,16 +2,8 @@ fileFormatVersion: 2
 guid: 0f96a2937f6bace459a5fdaac39c0fb3
 ShaderImporter:
   externalObjects: {}
-  defaultTextures:
-  - _Normal: {fileID: 2800000, guid: afc64e577b642994b99390375bd0d890, type: 3}
+  defaultTextures: []
   nonModifiableTextures: []
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 269112
-  packageName: 'Pure Nature 2 : Islands'
-  packageVersion: 2.1
-  assetPath: Assets/BK/Pure_Common/Shaders/BK_VegetationLeaves.shader
-  uploadId: 744931
