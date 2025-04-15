@@ -5,53 +5,37 @@ using UnityEngine.InputSystem;
 
 public class SplineManager : MonoBehaviour
 {
-    // Container for three Splines (lanes)
-    public SplineContainer splineContainer;
+    // a Spline Container per Lane
+    public SplineContainer centerSplineContainer;
+    public SplineContainer leftSplineContainer;
+    public SplineContainer rightSplineContainer;
 
     [Header("Prozedurale Parameter")]
     public float segmentLength = 10f;         // Length of new segments
-    public float maxCumulativeAngle = 90f;      // in degree
-    public float maxDeltaAngle = 20f;           // in degree
-    public float horizontalNoiseScale = 0.1f;   // Scaling for noise
-    public float verticalNoiseScale = 0.1f;     // Scaling for noise
-    public float heightAmplitude = 2f;          // Hight for path variation
-    public float laneOffset = 3f;               // Lane offset for additional 2 lanes
+    public float maxCumulativeAngle = 90f;      
+    public float maxDeltaAngle = 20f;           // Maximales Winkelinkrement pro Segment in Grad
+    public float horizontalNoiseScale = 0.1f;  
+    public float verticalNoiseScale = 0.1f;    
+    public float heightAmplitude = 2f;          
+    public float laneOffset = 3f;               
 
-    
     private Vector3 baseDirection = Vector3.right;
-    
     private float cumulativeAngle = 0f;
-
-    // Counter for knots
     private int counter = 4;
 
     void Start()
     {
-
-        if (splineContainer == null)
-            splineContainer = GetComponent<SplineContainer>();
-
-        if (splineContainer == null)
+        if (centerSplineContainer == null || leftSplineContainer == null || rightSplineContainer == null)
         {
-            Debug.LogError("Kein SplineContainer gefunden!");
+            Debug.LogError("Bitte alle drei SplineContainer (Center, Left, Right) zuweisen!");
             return;
         }
 
-        // Create three Splines in Container
-        Spline[] newSplines = new Spline[3];
-        for (int i = 0; i < newSplines.Length; i++)
-        {
-            newSplines[i] = new Spline();
-        }
-        
-        splineContainer.Splines = newSplines;
-
-        // Create four base knots
         BezierKnot[] initialKnots = new BezierKnot[4];
         for (int i = 0; i < initialKnots.Length; i++)
         {
             float x = i * segmentLength;
-            // Basic path
+            // Base Path (Spawn Area)
             initialKnots[i] = new BezierKnot(
                 new float3(x, 0, 0),
                 new float3((i == 0) ? 0 : -segmentLength * 0.5f, 0, 0),
@@ -60,38 +44,33 @@ public class SplineManager : MonoBehaviour
             );
         }
 
-        // Clear splines
-        splineContainer.Splines[0].Clear();
-        splineContainer.Splines[1].Clear();
-        splineContainer.Splines[2].Clear();
+        centerSplineContainer.Spline.Clear();
+        leftSplineContainer.Spline.Clear();
+        rightSplineContainer.Spline.Clear();
 
-        
         for (int i = 0; i < initialKnots.Length; i++)
         {
-            splineContainer.Splines[0].Add(initialKnots[i]);
+            centerSplineContainer.Spline.Add(initialKnots[i]);
 
-            // Bei einem geraden Pfad ist die Tangente in X-Richtung, sodass:
-            // Der "rechte" Vektor = Cross(Vector3.up, Vector3.right) ergibt (0, 0, -1).
+            
             Vector3 tangent = Vector3.right;
             Vector3 rightVec = Vector3.Cross(Vector3.up, tangent).normalized;
             Vector3 offset = rightVec * laneOffset;
 
-            // Linke Spur: Zentrum minus offset
             BezierKnot leftKnot = new BezierKnot(
                 initialKnots[i].Position - (float3)offset,
                 initialKnots[i].TangentIn,
                 initialKnots[i].TangentOut,
                 quaternion.identity
             );
-            // Rechte Spur: Zentrum plus offset
             BezierKnot rightKnot = new BezierKnot(
                 initialKnots[i].Position + (float3)offset,
                 initialKnots[i].TangentIn,
                 initialKnots[i].TangentOut,
                 quaternion.identity
             );
-            splineContainer.Splines[1].Add(leftKnot);
-            splineContainer.Splines[2].Add(rightKnot);
+            leftSplineContainer.Spline.Add(leftKnot);
+            rightSplineContainer.Spline.Add(rightKnot);
         }
 
         counter = initialKnots.Length;
@@ -109,13 +88,14 @@ public class SplineManager : MonoBehaviour
     
     void ExtendSpline()
     {
-        // Central Lane as base
-        int lastIndex = splineContainer.Splines[0].Count - 1;
-        float3 lastPos = splineContainer.Splines[0][lastIndex].Position;
+        // Center lane as base
+        int lastIndex = centerSplineContainer.Spline.Count - 1;
+        float3 lastPos = centerSplineContainer.Spline[lastIndex].Position;
         
         float noiseValue = Mathf.PerlinNoise(counter * horizontalNoiseScale, 0f);
         float deltaAngle = Mathf.Lerp(-maxDeltaAngle, maxDeltaAngle, noiseValue);
         
+        // Constraints
         if (Mathf.Abs(cumulativeAngle + deltaAngle) > maxCumulativeAngle)
         {
             deltaAngle = Mathf.Sign(deltaAngle) * (maxCumulativeAngle - Mathf.Abs(cumulativeAngle));
@@ -125,7 +105,6 @@ public class SplineManager : MonoBehaviour
         Quaternion rot = Quaternion.AngleAxis(cumulativeAngle, Vector3.up);
         Vector3 newDirection = rot * baseDirection;
         
-        // vertical Variation via Perlin Noise:
         float heightNoise = Mathf.PerlinNoise(counter * verticalNoiseScale, 1f);
         float verticalOffset = Mathf.Lerp(-heightAmplitude, heightAmplitude, heightNoise);
         
@@ -136,7 +115,6 @@ public class SplineManager : MonoBehaviour
         Vector3 newPointLeft = newPointCenter - rightVec * laneOffset;
         Vector3 newPointRight = newPointCenter + rightVec * laneOffset;
         
-        // Create new bezier knots
         BezierKnot newKnotCenter = new BezierKnot(
             new float3(newPointCenter),
             new float3(-newDirection * (segmentLength * 0.5f)),
@@ -156,9 +134,9 @@ public class SplineManager : MonoBehaviour
             quaternion.identity
         );
         
-        splineContainer.Splines[0].Add(newKnotCenter);
-        splineContainer.Splines[1].Add(newKnotLeft);
-        splineContainer.Splines[2].Add(newKnotRight);
+        centerSplineContainer.Spline.Add(newKnotCenter);
+        leftSplineContainer.Spline.Add(newKnotLeft);
+        rightSplineContainer.Spline.Add(newKnotRight);
         
         counter++;
     }
