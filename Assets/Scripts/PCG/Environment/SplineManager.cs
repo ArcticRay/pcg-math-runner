@@ -11,7 +11,7 @@ public class SplineManager : MonoBehaviour
     public SplineContainer rightSplineContainer;
 
     [Header("Prozedurale Parameter")]
-    public float segmentLength = 10f;         // Length of new segments
+    public float segmentLength = 20f;         // Length of new segments
     public float maxCumulativeAngle = 90f;      
     public float maxDeltaAngle = 20f;           // Maximales Winkelinkrement pro Segment in Grad
     public float horizontalNoiseScale = 0.1f;  
