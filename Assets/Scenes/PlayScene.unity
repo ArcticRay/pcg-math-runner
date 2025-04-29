@@ -741,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1978931847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splineManager: {fileID: 1985574802}
   width: 100
-  resolution: 10
   pathWidth: 10
   noiseScale: 0.5
   noiseAmplitude: 1
@@ -787,7 +786,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bf7a72c305b438786fe5a4bf038fdb1, type: 2}
+  - {fileID: 2100000, guid: bde9ddd832e38492490af03e7bb9a6e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -872,7 +871,7 @@ MonoBehaviour:
   maxDeltaAngle: 20
   horizontalNoiseScale: 0.1
   verticalNoiseScale: 0.2
-  heightAmplitude: 2
+  heightAmplitude: 5
   laneOffset: 3
   splineChunkGenerator: {fileID: 0}
 --- !u!4 &1985574804
@@ -1156,6 +1155,62 @@ MonoBehaviour:
   noiseAmplitude: 2
   beachHeight: 0.5
   grassHeight: 2
+--- !u!1 &2048460963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048460965}
+  - component: {fileID: 2048460964}
+  m_Layer: 0
+  m_Name: TerrainGenerator2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2048460964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048460963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52afef577de2d4b629cbee310cc0e8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineManager: {fileID: 1985574802}
+  pathMaterial: {fileID: 2100000, guid: bde9ddd832e38492490af03e7bb9a6e5, type: 2}
+  islandMaterial: {fileID: 2100000, guid: b9e4cfaf3ed7f4809bce4ea48d079ff4, type: 2}
+  waterMaterial: {fileID: 0}
+  pathWidth: 6
+  islandWidth: 16
+  noiseScale: 0.2
+  edgeVariation: 2.5
+  pathHeight: 0
+  islandDepth: 0.5
+  waterHeight: -10
+  uvScale: 3
+--- !u!4 &2048460965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048460963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2109197044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1246,3 +1301,4 @@ SceneRoots:
   - {fileID: 1313444606}
   - {fileID: 2042958468}
   - {fileID: 1978931850}
+  - {fileID: 2048460965}
