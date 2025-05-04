@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a89f78150e949e59e9a3d969f82b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureRenderer: {fileID: 771599854}
+  textureRender: {fileID: 771599854}
 --- !u!114 &1448336632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,10 +461,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b2ec42d41e7403dba03d3347650d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawMode: 1
   mapWidth: 100
   mapHeight: 100
-  noiseScale: 2
+  noiseScale: 11.92
+  octaves: 5
+  persistance: 0.43
+  lacunarity: 1.3
+  seed: 62
+  offset: {x: 0, y: 0}
   autoUpdate: 1
+  regions:
+  - name: Water
+    height: 0.4
+    colour: {r: 0.13082945, g: 0.17955099, b: 0.7924528, a: 0}
+  - name: Sand
+    height: 0.6
+    colour: {r: 0.7921569, g: 0.65928936, b: 0.12941176, a: 0}
+  - name: Grass
+    height: 1
+    colour: {r: 0.22300808, g: 0.7921569, b: 0.12941176, a: 0}
 --- !u!4 &1448336633
 Transform:
   m_ObjectHideFlags: 0
