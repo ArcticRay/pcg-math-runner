@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7d07614027d344e5a1eb2906381787ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/PureNature_Islands/Textures/Surfaces/TerrainLayers/Mud01.terrainlayer
+  uploadId: 744931

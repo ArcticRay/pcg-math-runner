@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 34f648f3cfde1434483a453558242f3d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/Pure_Common/Scripts/RaysFollow.cs
+  uploadId: 744931
