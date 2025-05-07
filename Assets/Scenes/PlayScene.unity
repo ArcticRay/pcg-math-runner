@@ -741,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1978931847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,8 +755,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineManager: {fileID: 1985574802}
-  width: 100
-  pathWidth: 10
+  width: 200
+  pathWidth: 15
   noiseScale: 0.5
   noiseAmplitude: 1
   islandFalloffStart: 30
@@ -825,7 +825,7 @@ Transform:
   m_GameObject: {fileID: 1978931846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -871,7 +871,7 @@ MonoBehaviour:
   maxDeltaAngle: 20
   horizontalNoiseScale: 0.1
   verticalNoiseScale: 0.2
-  heightAmplitude: 5
+  heightAmplitude: 10
   laneOffset: 3
   splineChunkGenerator: {fileID: 0}
 --- !u!4 &1985574804
