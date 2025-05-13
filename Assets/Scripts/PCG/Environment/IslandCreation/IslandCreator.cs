@@ -26,6 +26,15 @@ public class IslandCreator : MonoBehaviour
 
     public GameObject waterPlane; // A plane representing water surrounding the island
 
+
+    [Header("Fraktale Küsten-Parameter")]
+public int coastOctaves = 5;
+public float coastLacunarity = 2f;
+public float coastGain = 0.5f;
+public float coastRadiusMin = 0.8f;
+public float coastRadiusMax = 1.2f;
+
+
     void Start()
     {
         GenerateIsland();
@@ -155,6 +164,8 @@ public class IslandCreator : MonoBehaviour
             }
         }
     }
+
+    
 
     void PlaceObject(GameObject[] prefabs, Vector3 position)
     {

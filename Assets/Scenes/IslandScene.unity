@@ -169,6 +169,11 @@ MonoBehaviour:
   grassDensity: 0.1
   fallStuffDensity: 0.05
   waterPlane: {fileID: 1761699606}
+  coastOctaves: 5
+  coastLacunarity: 2
+  coastGain: 0.5
+  coastRadiusMin: 0.8
+  coastRadiusMax: 1.2
 --- !u!4 &1046851580
 Transform:
   m_ObjectHideFlags: 0
