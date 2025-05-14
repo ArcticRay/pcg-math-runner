@@ -14,10 +14,10 @@ public class IslandDecorator : Decorator
 
     [Header("Density Settings (0–1)")]
     [Range(0f,1f)] public float palmDensity       = 0.006f;
-    [Range(0f,1f)] public float bushDensity       = 0.1f;
-    [Range(0f,1f)] public float flowerDensity     = 0.05f;
-    [Range(0f,1f)] public float rockDensity       = 0.02f;
-    [Range(0f,1f)] public float grassPatchDensity = 0.9f;
+    [Range(0f,1f)] public float bushDensity       = 0.001f;
+    [Range(0f,1f)] public float flowerDensity     = 0.005f;
+    [Range(0f,1f)] public float rockDensity       = 0.002f;
+    [Range(0f,1f)] public float grassPatchDensity = 0.5f;
 
     [Header("Map Colors")]
     public Color deepWaterColor;

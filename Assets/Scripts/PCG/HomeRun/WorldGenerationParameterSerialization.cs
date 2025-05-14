@@ -4,8 +4,8 @@ using System.IO;
 
 public class WorldGenerationParameterSerialization
 {
-    private static readonly string cachePath = Path.Combine(Application.dataPath, "Cache");
-    private static readonly string fileName = Path.Combine(cachePath, "worldgenconfig.json");
+    private static readonly string cachePath = Path.Combine(Application.dataPath, "StreamingAssets");
+    private static readonly string fileName = Path.Combine(Application.streamingAssetsPath, "worldgenconfig.json");
 
     public static void CreateDefaultConfigFile()
     {
@@ -19,7 +19,6 @@ public class WorldGenerationParameterSerialization
         try
         {
             var json = File.ReadAllText(fileName);
-            //can i load it as worldGenerationParameters? and then load it agains as a specific type?
             var parameters = ScriptableObject.CreateInstance<WorldGenerationParameters>();
             JsonUtility.FromJsonOverwrite(json, parameters);
             // Ignore Seed for random worlds

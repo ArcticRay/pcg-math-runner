@@ -6,7 +6,7 @@ public class ChunkSystem : MonoBehaviour {
     public GameObject chunkPrefab;
     public GameObject player;
     public WorldGenerationParameters parameters;
-    public bool updateChunkgrid;
+    public bool updateChunkgrid = true;
     private Dictionary<(int,int), GameObject> chunks;
     private Dictionary<(int,int), List<Vector3>> pathPointsOfChunk;
     private (int,int) previousChunkIndex;

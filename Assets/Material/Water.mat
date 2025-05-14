@@ -140,9 +140,9 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _TesselationPower: 1
-    - _WavesHeight: 1
-    - _WavesScale: 5
-    - _WavesSpeed: 1
+    - _WavesHeight: 2
+    - _WavesScale: 10
+    - _WavesSpeed: 2
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

@@ -8,10 +8,7 @@ using System.Linq;
 public class SplineManagerNew : MonoBehaviour
 {
     [Header("Spline Settings")]
-    public float distanceBetweenPoints = 20f;
-
-    public float randomRangeX = 5f;
-    public float laneOffset = 15f;
+    public float laneOffset = 40f;
 
     public SplineContainer centerSplineContainer;
     public SplineContainer leftSplineContainer;
@@ -42,8 +39,7 @@ public class SplineManagerNew : MonoBehaviour
     private void Start()
     {
         parameters = WorldGenerationParameterSerialization.GetWorldGenerationParameters();
-        distanceBetweenPoints = parameters.pathSegmentLength * parameters.scale;
-        laneOffset = 15f;
+        laneOffset = 40f;
         MasterPointCount = masterPoints.Count;
     }
 

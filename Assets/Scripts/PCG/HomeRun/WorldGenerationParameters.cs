@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WorldGenerationParameters", menuName = "World/Generation Parameters")]
@@ -72,25 +73,13 @@ public class WorldGenerationParameters : ScriptableObject
         {
             noisefactor = Mathf.Lerp(4000, 3400, hillyness);
             MeshHeightMultiplier = Mathf.Lerp(150, 250, hillyness);
-            renderDistance = 5;
+            renderDistance = 2;
             seaLevel = -120;
             sandLevel = -110;
             snowLevel = int.MaxValue;
         }
-        else if (worldType == WorldType.ISLAND)
-        {
-            noisefactor = Mathf.Lerp(4000, 2500, hillyness);
-            MeshHeightMultiplier = Mathf.Lerp(200, 430, hillyness);
-        }
-
-        if (!snowyMountain)
-        {
-            snowLevel = int.MaxValue;
-        }
-        if (!lakes)
-        {
-            seaLevel = int.MinValue;
-            sandLevel = int.MinValue + 10;
+        else if (worldType == WorldType.ISLAND) {
+            noisefactor = Mathf.Lerp(4000, 3400, hillyness);
         }
     }
 

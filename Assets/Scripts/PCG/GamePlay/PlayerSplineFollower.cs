@@ -17,7 +17,7 @@ public class PlayerSplineFollower : MonoBehaviour
     // -1 = links, 0 = center, 1 = rechts
     private int targetLane = 0;
     private float currentLateralOffset = 0f;  // Lerp-basierter Wert für den aktuellen Seitversatz
-    public float laneOffset = 3f;             
+    public float laneOffset = 30f;             
 
     // Progress along the spline
     private float progress = 0f;
