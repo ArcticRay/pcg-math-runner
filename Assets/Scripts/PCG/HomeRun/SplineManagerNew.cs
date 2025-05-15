@@ -7,6 +7,7 @@ using System.Linq;
 
 public class SplineManagerNew : MonoBehaviour
 {
+    [SerializeField] private GameObject tafelPrefab;
     [Header("Spline Settings")]
     public float laneOffset = 20f;
 
@@ -38,6 +39,10 @@ public class SplineManagerNew : MonoBehaviour
         parameters = WorldGenerationParameterSerialization.GetWorldGenerationParameters();
         laneOffset = 20f;
         MasterPointCount = masterPoints.Count;
+
+        GameObject tafelInstance = Instantiate(tafelPrefab, new Vector3(0, 10, 10), Quaternion.identity);
+        TafelDisplay display = tafelInstance.GetComponent<TafelDisplay>();
+        display.SetText("7 + 4 = ?"); 
     }
 
     public (Vector3, Vector3, float) GetSegment(float t)
