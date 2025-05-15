@@ -40,55 +40,10 @@ public class SplineManager : MonoBehaviour
             return;
         }
 
-        BezierKnot[] initialKnots = new BezierKnot[4];
-        for (int i = 0; i < initialKnots.Length; i++)
-        {
-            float x = i * segmentLength;
-            // Base Path (Spawn Area)
-            initialKnots[i] = new BezierKnot(
-                new float3(x, 0, 0),
-                new float3((i == 0) ? 0 : -segmentLength * 0.5f, 0, 0),
-                new float3((i < 3) ? segmentLength * 0.5f : 0, 0, 0),
-                quaternion.identity
-            );
-
-            splinePoints.Add(new Vector3(x, 0, 0));
-        }
 
         centerSplineContainer.Spline.Clear();
         leftSplineContainer.Spline.Clear();
         rightSplineContainer.Spline.Clear();
-
-        for (int i = 0; i < initialKnots.Length; i++)
-        {
-            centerSplineContainer.Spline.Add(initialKnots[i]);
-
-
-            Vector3 tangent = Vector3.right;
-            Vector3 rightVec = Vector3.Cross(Vector3.up, tangent).normalized;
-            Vector3 offset = rightVec * laneOffset;
-
-            BezierKnot leftKnot = new BezierKnot(
-                initialKnots[i].Position - (float3)offset,
-                initialKnots[i].TangentIn,
-                initialKnots[i].TangentOut,
-                quaternion.identity
-            );
-            BezierKnot rightKnot = new BezierKnot(
-                initialKnots[i].Position + (float3)offset,
-                initialKnots[i].TangentIn,
-                initialKnots[i].TangentOut,
-                quaternion.identity
-            );
-            leftSplineContainer.Spline.Add(leftKnot);
-            rightSplineContainer.Spline.Add(rightKnot);
-        }
-
-        counter = initialKnots.Length;
-        baseDirection = Vector3.right;
-        cumulativeAngle = 0f;
-
-        // splineChunkGenerator.GenerateChunk(splinePoints);
     }
 
     void Update()
@@ -98,6 +53,16 @@ public class SplineManager : MonoBehaviour
             ExtendSpline();
         }
     }
+
+    public void UseMasterControlPoints(List<Vector3> list)
+    {
+        splinePoints = list;
+        for (int i = 0; i < splinePoints.Count; i++)
+        {
+            Vector3 newPointCenter = splinePoints[i];
+        }
+    }
+
 
     void ExtendSpline()
     {

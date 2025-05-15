@@ -8,17 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ocean
-  m_Shader: {fileID: 4800000, guid: 6468bfbdaa889dd40a87fa06b6428b8f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6a71b3bbb99d34d87a8344f8e113304f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _MULTIPLYOPACITY_ON
-  - _USETRANSPARENCY_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -131,6 +129,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AddPrecomputedVelocity: 1
     - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _CausticOffset: 100
@@ -142,7 +141,7 @@ Material:
     - _Cutoff: 0.5
     - _Depth: 17.67
     - _DetailNormalMapScale: 1
-    - _DistanceFade: 150
+    - _DistanceFade: 1000
     - _DistanceFadeOffset: 1000
     - _DistanceMax: 200
     - _DistanceMin: 20
@@ -206,7 +205,7 @@ Material:
     - _WaterSmoothness: 0
     - _WaterSpecular: 0
     - _WaterSpeed: 0
-    - _WavesHeight: 0.3
+    - _WavesHeight: 0.4
     - _WavesScale: 10
     - _WavesSpeed: 5
     - _WavesTiling: 0.5
@@ -237,3 +236,4 @@ Material:
     - _WavesScaleOLD: {r: 1, g: 1, b: 0, a: 0}
     - _WavesScaleXY: {r: 0.1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
