@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f745f0e8ac7048d488fca3d6dfeb4ef7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -225,11 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 294402095}
-  m_ItemsToInstantiate:
-  - prefab: {fileID: 0}
-    Prefab: {fileID: 4862012380726095740, guid: 3116fe56d90a4e4bb3c63be2c7ca6068, type: 3}
-    probability: 0
-    Probability: 100
+  m_ItemsToInstantiate: []
   m_Method: 1
   m_Space: 0
   m_Spacing: {x: 1, y: 1}
@@ -261,7 +257,7 @@ MonoBehaviour:
     space: 0
   m_DeprecatedInstances: []
   m_AutoRefresh: 1
-  m_Seed: -56805904
+  m_Seed: -1699190
 --- !u!1 &502920622
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,8 +703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548ca73d8b7174f03b908aca7b27ca89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceBetweenPoints: 20
-  randomRangeX: 5
   laneOffset: 50
   centerSplineContainer: {fileID: 294402095}
   leftSplineContainer: {fileID: 1845191557}
@@ -716,116 +710,6 @@ MonoBehaviour:
   MasterPointCount: 0
   drawDebugSplines: 1
   masterPoints: []
---- !u!1 &1668070444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1668070446}
-  - component: {fileID: 1668070445}
-  m_Layer: 0
-  m_Name: ChunkGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1668070445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668070444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46f3f06024a8c4febb6eb8414078233b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  convergenceToPath:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.19127858
-      value: 0.7787072
-      inSlope: 1.2788506
-      outSlope: 1.2788506
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  terrainCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7551912
-      value: 0.38914424
-      inSlope: 1.4409032
-      outSlope: 1.4409032
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &1668070446
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668070444}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700665684
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,10 +741,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerSplineContainer: {fileID: 294402095}
   segmentLength: 20
-  baseSpeed: 10
+  baseSpeed: 20
   sprintMultiplier: 1.5
   laneSwitchSpeed: 5
-  laneOffset: 30
+  laneOffset: 20
 --- !u!4 &1700665686
 Transform:
   m_ObjectHideFlags: 0
@@ -1127,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cdd601386b4426390a1fe265b01088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 90fc46d044124b99aac1c50316fa8f00, type: 2}
+  material: {fileID: 2100000, guid: b87379f527c53406b91fec722caafe20, type: 2}
   palmPrefabs:
   - {fileID: 4862012380726095740, guid: 3116fe56d90a4e4bb3c63be2c7ca6068, type: 3}
   - {fileID: 8485893231006620345, guid: f6b432ab29364fb0a0b0ab7a44d1e899, type: 3}
@@ -1135,6 +1019,9 @@ MonoBehaviour:
   - {fileID: 7847929318069722688, guid: 552365f4070b4fc8aac383be43a197ed, type: 3}
   - {fileID: 3079479647208147444, guid: 0500c9cc85014f5f9807902c10469a4e, type: 3}
   - {fileID: 6745553711898707945, guid: 19216f88adc74159be81e2dbbe0eea71, type: 3}
+  - {fileID: 640726290076689912, guid: d6de07b6226a44d49af4fcaa7c722418, type: 3}
+  - {fileID: 1377970573560045117, guid: a1681f2c6482435aa351534ad2219738, type: 3}
+  - {fileID: 3270251470116878460, guid: 8a7d7fcdbb174de18edc0b968e8dab51, type: 3}
   grassPrefabs:
   - {fileID: 3987863668785023380, guid: 02ef8db388f544d6ac807b67758063ee, type: 3}
   - {fileID: 328724798720682844, guid: 5b7f82bb880d4b07a816096326b25e8e, type: 3}
@@ -1147,16 +1034,26 @@ MonoBehaviour:
   - {fileID: 936885022748966400, guid: 37c6058d649849399ecd8453f0d0e9d5, type: 3}
   - {fileID: 3279766148649637828, guid: d91d1eb25948408988cbd8c28d2987c8, type: 3}
   - {fileID: 4062056727193576093, guid: 83eb4858addf4de5ad6fea60dc7ab7e4, type: 3}
+  - {fileID: 1883203016015718108, guid: 91ab9175b39e4243a065b27a4d33d883, type: 3}
+  - {fileID: 3104581266277880389, guid: 115611a83bf24e1a8c7df487cd1a544d, type: 3}
+  - {fileID: 8459377158986489142, guid: 8faf8407a2f1417aafc7fc355f9674ff, type: 3}
   rockPrefabs:
   - {fileID: 8888003951610112524, guid: d85b0b99ba2541fc8d1d67b661fcae64, type: 3}
   - {fileID: 1144235722654694036, guid: 6117edfabfc34861a5f11525a3dd6716, type: 3}
   - {fileID: 2498912299649407062, guid: c4e94b00b5fc406b9a10eda663aa7809, type: 3}
-  waterPrefab: {fileID: 2624384085149022512, guid: c125dd58db24a423785cc4c0624f954c, type: 3}
-  palmDensity: 0.005
+  cliffPrefabs:
+  - {fileID: 6533995593411013638, guid: c66bdc3baacd4171bfb9402e69687fe1, type: 3}
+  - {fileID: 5509919475490984959, guid: 5ba2f4314eef48eb8b35f0fe12b899c9, type: 3}
+  waterPrefab: {fileID: 5079620049439556529, guid: 4d5641871844b42bcab52088078984cb, type: 3}
+  palmDensity: 0.01
   bushDensity: 0.01
-  flowerDensity: 0.01
+  flowerDensity: 0.098
   rockDensity: 0.001
-  grassPatchDensity: 0.001
+  grassPatchDensity: 0.16
+  cliffDensity: 0.002
+  cliffMinPathDistance: 500
+  rockMaxSlope: 40
+  cliffMaxSlope: 20
   deepWaterColor: {r: 0, g: 0, b: 0, a: 0}
   shallowWaterColor: {r: 0, g: 0, b: 0, a: 0}
   sandColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1190,6 +1087,18 @@ PrefabInstance:
     - target: {fileID: 5276194084423436488, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
       propertyPath: m_Name
       value: Environment Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276194084423436494, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276194084423436494, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276194084423436494, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5276194084423436494, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1250,6 +1159,10 @@ PrefabInstance:
     - target: {fileID: 5276194084423436495, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
       propertyPath: baseWindPower
       value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276194084423436495, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
+      propertyPath: renderDistance
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5276194084423436495, guid: 8149d26980d14792bffa647f2ce4cc54, type: 3}
       propertyPath: directionalLight
@@ -1385,5 +1298,4 @@ SceneRoots:
   - {fileID: 1099774687}
   - {fileID: 1700665686}
   - {fileID: 1993643471}
-  - {fileID: 1668070446}
   - {fileID: 1725759533}

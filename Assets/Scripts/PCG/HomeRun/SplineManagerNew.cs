@@ -8,7 +8,7 @@ using System.Linq;
 public class SplineManagerNew : MonoBehaviour
 {
     [Header("Spline Settings")]
-    public float laneOffset = 40f;
+    public float laneOffset = 20f;
 
     public SplineContainer centerSplineContainer;
     public SplineContainer leftSplineContainer;
@@ -24,9 +24,6 @@ public class SplineManagerNew : MonoBehaviour
     private List<Vector3> rightPoints = new List<Vector3>();
 
 
-    /// <summary>
-    /// Reference to the world generation parameters.
-    /// </summary>
     private WorldGenerationParameters parameters;
 
     public static SplineManagerNew Instance { get; private set; }
@@ -39,7 +36,7 @@ public class SplineManagerNew : MonoBehaviour
     private void Start()
     {
         parameters = WorldGenerationParameterSerialization.GetWorldGenerationParameters();
-        laneOffset = 40f;
+        laneOffset = 20f;
         MasterPointCount = masterPoints.Count;
     }
 

@@ -41,7 +41,7 @@ public class WorldGenerationParameters : ScriptableObject
         worldName = "Neue Welt";
         walkDuration = 1800;
         chunkSize = 80;
-        scale = 10;
+        scale = 1;
         noisefactor = 2200;
         octaves = 7;
         persistence = 0.43f;
@@ -78,8 +78,10 @@ public class WorldGenerationParameters : ScriptableObject
             sandLevel = -110;
             snowLevel = int.MaxValue;
         }
-        else if (worldType == WorldType.ISLAND) {
-            noisefactor = Mathf.Lerp(4000, 3400, hillyness);
+        else if (worldType == WorldType.ISLAND)
+        {
+            noisefactor = Mathf.Lerp(3000, 3400, hillyness);
+            seaLevel = 2;
         }
     }
 
