@@ -9,8 +9,12 @@ public class IslandDecorator : Decorator
     public GameObject[] bushPrefabs;
     public GameObject[] flowerPrefabs;
     public GameObject[] rockPrefabs;
-    public GameObject[] cliffPrefabs;   
+    public GameObject[] cliffPrefabs;
     public GameObject   waterPrefab;
+
+    [Header("Underwater Prefabs")]
+    public GameObject[] underwaterPlantPrefabs;
+    [Range(0f,1f)] public float underwaterPlantDensity = 0.05f;
 
     [Header("Density Settings (0–1)")]
     [Range(0f,1f)] public float palmDensity           = 0.01f;
@@ -18,10 +22,10 @@ public class IslandDecorator : Decorator
     [Range(0f,1f)] public float flowerDensity         = 0.01f;
     [Range(0f,1f)] public float rockDensity           = 0.002f;
     [Range(0f,1f)] public float grassPatchDensity     = 0.1f;
-    [Range(0f,1f)] public float cliffDensity          = 0.001f; 
+    [Range(0f,1f)] public float cliffDensity          = 0.001f;
     public float cliffMinPathDistance                 = 500f;
-    [Range(0f,90f)] public float rockMaxSlope         = 40f;   
-    [Range(0f, 90f)] public float cliffMaxSlope        = 20f;   
+    [Range(0f,90f)] public float rockMaxSlope         = 40f;
+    [Range(0f,90f)] public float cliffMaxSlope        = 20f;
 
     [Header("Map Colors")]
     public Color deepWaterColor;
@@ -59,7 +63,27 @@ public class IslandDecorator : Decorator
           + (int)(chunkGenerator.GetOffset().y / parameters.ScaledChunkSize())
         );
 
-        // Wasser 
+        // --- Underwater Plants ---
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 worldPos = chunkGenerator.transform.position + vertices[i];
+            float height = worldPos.y;
+
+            // nur unter Wasser und nicht auf Pfad
+            if (height < seaLevel && !WithinDistanceToPath(pathProximity, i, parameters.onPathDistance))
+            {
+                if (random.NextDouble() < underwaterPlantDensity)
+                {
+                    var (plant, _) = RandomGameObject(
+                        chunkGenerator, random, worldPos, Quaternion.identity, underwaterPlantPrefabs
+                    );
+                    RandomUpscale(plant, random, 10, 20);
+                    RandomRotation(plant, random);
+                }
+            }
+        }
+
+        // Wasser-Seen / Pools
         if (parameters.lakes)
         {
             int worldSize = parameters.chunkSize * parameters.scale;
@@ -87,7 +111,7 @@ public class IslandDecorator : Decorator
             if (WithinDistanceToPath(pathProximity, i, parameters.onPathDistance + 5f))
                 continue;
 
-            
+            // Klippen
             if (slope <= cliffMaxSlope
              && !WithinDistanceToPath(pathProximity, i, cliffMinPathDistance)
              && random.NextDouble() < cliffDensity)
@@ -101,11 +125,9 @@ public class IslandDecorator : Decorator
                 continue;
             }
 
-            // steile Flächen überspringen 
             if (slope > rockMaxSlope)
                 continue;
 
-            // Position mit Rauschen
             Vector3 spawnNoisy = worldPos + PositionNoise(random, 0f);
 
             // Palmen
