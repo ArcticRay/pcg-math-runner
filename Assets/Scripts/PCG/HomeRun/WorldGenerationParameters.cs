@@ -80,7 +80,7 @@ public class WorldGenerationParameters : ScriptableObject
         }
         else if (worldType == WorldType.ISLAND)
         {
-            noisefactor = Mathf.Lerp(3000, 3400, hillyness);
+            noisefactor = Mathf.Lerp(3200, 3400, hillyness);
             seaLevel = 2;
         }
     }

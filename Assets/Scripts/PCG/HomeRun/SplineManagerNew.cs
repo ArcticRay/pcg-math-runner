@@ -38,6 +38,7 @@ public class SplineManagerNew : MonoBehaviour
         parameters = WorldGenerationParameterSerialization.GetWorldGenerationParameters();
         laneOffset = 20f;
         MasterPointCount = masterPoints.Count;
+
     }
 
     public (Vector3, Vector3, float) GetSegment(float t)
