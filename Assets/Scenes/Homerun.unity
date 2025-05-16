@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cdd601386b4426390a1fe265b01088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: b87379f527c53406b91fec722caafe20, type: 2}
+  material: {fileID: 2100000, guid: 90fc46d044124b99aac1c50316fa8f00, type: 2}
   palmPrefabs:
   - {fileID: 4862012380726095740, guid: 3116fe56d90a4e4bb3c63be2c7ca6068, type: 3}
   - {fileID: 8485893231006620345, guid: f6b432ab29364fb0a0b0ab7a44d1e899, type: 3}
@@ -1045,6 +1045,26 @@ MonoBehaviour:
   - {fileID: 6533995593411013638, guid: c66bdc3baacd4171bfb9402e69687fe1, type: 3}
   - {fileID: 5509919475490984959, guid: 5ba2f4314eef48eb8b35f0fe12b899c9, type: 3}
   waterPrefab: {fileID: 5079620049439556529, guid: 4d5641871844b42bcab52088078984cb, type: 3}
+  underwaterPlantPrefabs:
+  - {fileID: 9051603085483339158, guid: c316696271d443f0801e6d3170923cb9, type: 3}
+  - {fileID: 1248258751478844261, guid: af662f9e525345b69d660577f28a9963, type: 3}
+  - {fileID: 5508791052246764325, guid: 7d03dc9f310343948ec2d7a3fbaa83a7, type: 3}
+  - {fileID: 3130678606552828421, guid: fdc09ad4a4424d0e94ba1d7fd878d22b, type: 3}
+  - {fileID: 8931042610654969796, guid: 04098e9b75234deba4bb0e87d7a6d223, type: 3}
+  - {fileID: 7305106409504829611, guid: 16b1c6524467442b96f3b8e9fc76ef0a, type: 3}
+  - {fileID: 4114813188548520785, guid: 40b5e5418e2d459aa6611cb1b1e5ba54, type: 3}
+  - {fileID: 8144929124514351528, guid: a34ffa288da84e6e9f6e925bd462b40a, type: 3}
+  - {fileID: 7194701132898719490, guid: cb40589c60394e6db722b20e96912d94, type: 3}
+  - {fileID: 2281340600171039925, guid: ff4056c8da744b2f9ce112c44f020f3b, type: 3}
+  - {fileID: 1105639241459642038, guid: c3038490ddef4d87a429a2d6122ee78a, type: 3}
+  - {fileID: 3144348930860292657, guid: 1c7e11730a9e4774a68f903d9047197a, type: 3}
+  - {fileID: 1598519129424100429, guid: 24eff5f22afe4d41b5b46d6a2829a5ee, type: 3}
+  - {fileID: 4930747967296392258, guid: 76ce1cd6c8e04b708b26c1e9f7d04cde, type: 3}
+  - {fileID: 8982941413919346573, guid: 5db42abe9cc841db9ed2c2fa99b18517, type: 3}
+  - {fileID: 3876173400998635052, guid: 338372a002e54106a7b732a191d61616, type: 3}
+  - {fileID: 7412031378766266, guid: 9656af356c634f8488ee6f1d521bcc6e, type: 3}
+  - {fileID: 7412031378766266, guid: 9656af356c634f8488ee6f1d521bcc6e, type: 3}
+  underwaterPlantDensity: 0
   palmDensity: 0.01
   bushDensity: 0.01
   flowerDensity: 0.098

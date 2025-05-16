@@ -69,7 +69,7 @@ public class WorldGenerationParameters : ScriptableObject
 
     public void RevalidateParameters()
     {
-        if (worldType == WorldType.DESERT)
+        if (worldType == WorldType.OCEAN)
         {
             noisefactor = Mathf.Lerp(4000, 3400, hillyness);
             MeshHeightMultiplier = Mathf.Lerp(150, 250, hillyness);
