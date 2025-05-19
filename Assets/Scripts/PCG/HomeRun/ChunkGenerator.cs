@@ -11,7 +11,15 @@ public class ChunkGenerator : MonoBehaviour {
     private float[,] heightMap;
     private float[,] distanceToPath;
 
-    private void InitializeOffset() {
+    float minimalHeightDifference = float.MaxValue;
+    float minimalWaterPenalty    = float.MaxValue;
+    Vector3 tangentForMinimum    = Vector3.zero;
+    
+    [Tooltip("How strongly the path should avoid water. 0 = ignore, larger = avoid more.")]
+    public float waterAvoidancePenalty = 200f;
+
+    private void InitializeOffset()
+    {
         Vector3 position = GetComponent<Transform>().position;
         offset = new(position.x, position.z);
     }
@@ -96,58 +104,104 @@ public class ChunkGenerator : MonoBehaviour {
     }
 
 
-    public (int, int, Vector3, List<Vector3>) GeneratePathWithinChunk(Vector3 lastPoint, int startX, int startZ, int chunkSize, Vector3 tangent, Direction direction, WorldGenerationParameters parameters) {
-        List<Vector3> pathPoints = new();
-        if(offset == Vector2.zero) {
-            //this is the first chunk
+    public (int, int, Vector3, List<Vector3>) GeneratePathWithinChunk(
+        Vector3 lastPoint,
+        int startX,
+        int startZ,
+        int chunkSize,
+        Vector3 tangent,
+        Direction direction,
+        WorldGenerationParameters parameters
+        )
+    {
+        var pathPoints = new List<Vector3>();
+
+        // Starter-Chunk?
+        if (offset == Vector2.zero)
+        {
             (startX, startZ) = ChoosePathStartingPoint();
             pathPoints.Add(VertexCoordinate(parameters, startX, startZ));
         }
-        (float,float) angleConstraints = AngleConstraints(direction);
+
+        // Winkel-Constraints
+        var angleConstraints = AngleConstraints(direction);
         angleConstraints = UpdatedAngleConstraints(angleConstraints, tangent, Util.DirectionToVector(direction));
-        int i = 0;
-        do {
-            /* Get the previous point */
+
+        const int iterationLimit = 300;    // max. Schleifendurchläufe
+        int iteration = 0;
+
+        do
+        {
+            // letzten Punkt holen (oder lastPoint, falls leer)
             Vector3 previousPoint;
-            try {
-                previousPoint = pathPoints[pathPoints.Count-1];
-            } catch (ArgumentOutOfRangeException) {
+            if (pathPoints.Count > 0)
+            {
+                previousPoint = pathPoints[pathPoints.Count - 1];
+            }
+            else
+            {
                 previousPoint = lastPoint;
             }
 
-            /* Determine next point */
-            (int newX, int newZ) = DetermineNextPathPoint(heightMap, parameters, tangent, (startX, startZ), previousPoint.y, Math.Clamp(angleConstraints.Item1, -30, 0), Math.Clamp(angleConstraints.Item2, 0, 30));
-            //clamp points
-            if(direction == Direction.EAST && newX == 0) newX++;
-            else if(direction == Direction.WEST && newX == chunkSize) newX--;
-            else if(newZ == 0) newZ++;
-            Vector3 coordinate = VertexCoordinate(parameters, newX, newZ);
+            // nächstes Segment berechnen
+            (int newX, int newZ) = DetermineNextPathPoint(
+                heightMap,
+                parameters,
+                tangent,
+                (startX, startZ),
+                previousPoint.y,
+                Math.Clamp(angleConstraints.Item1, -30, 0),
+                Math.Clamp(angleConstraints.Item2,  0, 30)
+            );
 
-            /* Prevent too steep inclines */
-            float distanceToLastPoint = (new Vector2(coordinate.x, coordinate.z) - new Vector2(previousPoint.x, previousPoint.z)).magnitude;
-            float heightDifference = coordinate.y - previousPoint.y;
-            if(Math.Abs(heightDifference/distanceToLastPoint) > parameters.maximumIncline) {
-                var a = Math.Sign(heightDifference) * distanceToLastPoint * parameters.maximumIncline + previousPoint.y;
-                coordinate.y = Math.Sign(heightDifference) * distanceToLastPoint * parameters.maximumIncline + previousPoint.y;
+            // innerhalb der Grenzen halten
+            if (direction == Direction.EAST   && newX == 0)        newX++;
+            else if (direction == Direction.WEST && newX == chunkSize) newX--;
+            else if (newZ == 0)                                  newZ++;
+
+            var coordinate = VertexCoordinate(parameters, newX, newZ);
+
+            // maximale Steigung sicherstellen
+            float planarDist = Vector2.Distance(
+                new Vector2(coordinate.x, coordinate.z),
+                new Vector2(previousPoint.x, previousPoint.z)
+            );
+            float rise = coordinate.y - previousPoint.y;
+            if (Math.Abs(rise / planarDist) > parameters.maximumIncline)
+            {
+                coordinate.y = previousPoint.y
+                            + Math.Sign(rise)
+                            * planarDist
+                            * parameters.maximumIncline;
             }
 
             pathPoints.Add(coordinate);
 
-            /* update for next point tangent and angle constraints */
-            Vector3 newTangent = new Vector3(newX - startX, 0, newZ - startZ);
+            // Tangent & Winkel-Constraints updaten
+            var newTangent = new Vector3(newX - startX, 0, newZ - startZ);
             angleConstraints = UpdatedAngleConstraints(angleConstraints, newTangent, tangent);
             tangent = newTangent;
 
-            /* update starting position for next point */
+            // neue Start-Koords
             startX = newX;
             startZ = newZ;
 
-            /* Prevent freeze of application in case of error */
-            if (i == 100) throw new Exception("Too many iterations in chunk system");
-            i++;
-        } while (!Util.IsChunkBorder(chunkSize, startX, startZ));
-        return (startX,startZ,tangent,pathPoints);
+            // Iterations-Limit prüfen
+            iteration++;
+            if (iteration >= iterationLimit)
+            {
+                Debug.LogWarning(
+                    $"GeneratePathWithinChunk: reached iteration limit ({iterationLimit}) at chunk offset {offset}. " +
+                    "Falling back to partial path."
+                );
+                break;
+            }
+        }
+        while (!Util.IsChunkBorder(chunkSize, startX, startZ));
+
+        return (startX, startZ, tangent, pathPoints);
     }
+
 
     public (int,int) ChoosePathStartingPoint() {
         float accumulatedHeights = 0;
@@ -195,15 +249,36 @@ public class ChunkGenerator : MonoBehaviour {
         Vector3 tangentForMinimum = new();
         tangent = toLeft * tangent;
         tangent = tangent.normalized * rayLength;
-        for(int i = 0; i < rays; i++) {
-            float candidateHeight = heightMap[(int)Math.Clamp(indexInVertexGrid.Item1 + tangent.x, 0, chunkSize), (int)Math.Clamp(indexInVertexGrid.Item2 + tangent.z, 0, chunkSize)];
+        for (int i = 0; i < rays; i++)
+        {
+            // sample height
+            float candidateHeight = heightMap[
+            (int)Math.Clamp(indexInVertexGrid.Item1 + tangent.x,  0, chunkSize),
+            (int)Math.Clamp(indexInVertexGrid.Item2 + tangent.z,  0, chunkSize)
+            ];
+
+            // 1) base cost = how steep the step is
             float heightDifference = Math.Abs(currentHeight - candidateHeight);
-            if (heightDifference < minimalHeightDifference) {
-                minimalHeightDifference = heightDifference;
-                tangentForMinimum = tangent;
+
+            float worldY = candidateHeight * parameters.MeshHeightMultiplier;
+            float penalty = 0f;
+            if (worldY < parameters.seaLevel + 1f)  // “+1” gives a tiny buffer
+            {
+                penalty = waterAvoidancePenalty;
             }
+
+            float totalCost = heightDifference + penalty;
+
+            if (totalCost < minimalHeightDifference + minimalWaterPenalty)
+            {
+                minimalHeightDifference = heightDifference;
+                minimalWaterPenalty    = penalty;
+                tangentForMinimum      = tangent;
+            }
+
             tangent = nextRay * tangent;
         }
+
         int x = (int)Math.Clamp(indexInVertexGrid.Item1 + tangentForMinimum.x, 0, chunkSize);
         int z = (int)Math.Clamp(indexInVertexGrid.Item2 + tangentForMinimum.z, 0, chunkSize);
         return (x,z);
@@ -216,17 +291,28 @@ public class ChunkGenerator : MonoBehaviour {
     }
 
 
-    public (float,float) AngleConstraints(Direction direction) {
-        return direction switch
-        {
-            Direction.NORTH => (-90, 90),
-            Direction.NORTHEAST => (-45, 45),
-            Direction.EAST => (-90, 0),
-            Direction.WEST => (0, 90),
-            Direction.NORTHWEST => (-45,45),
-            _ => throw new Exception("Should not be able to go south"),
-        };
+    public (float left, float right) AngleConstraints(Direction direction)
+{
+    switch (direction)
+    {
+        case Direction.NORTH:
+            return (-90, 90);
+        case Direction.NORTHEAST:
+        case Direction.NORTHWEST:
+            return (-45, 45);
+        case Direction.EAST:
+            return (-90, 0);
+        case Direction.WEST:
+            return (0, 90);
+        case Direction.SOUTH:
+            Debug.LogWarning("AngleConstraints received SOUTH — using default constraints");
+            // Fallback auf voller Links‐/Rechtsreichweite
+            return (-90, 90);
+        default:
+            Debug.LogWarning($"AngleConstraints received unexpected direction {direction}. Using defaults.");
+            return (-90, 90);
     }
+}
 
     public Vector3 VertexCoordinate(WorldGenerationParameters parameters, int heightmapX, int heightmapZ) {
         Vector3 coordinate = new Vector3(heightmapX * parameters.scale + offset.x, heightMap[heightmapX, heightmapZ] * parameters.MeshHeightMultiplier, heightmapZ * parameters.scale + offset.y);
