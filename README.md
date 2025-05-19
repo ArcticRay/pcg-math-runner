@@ -32,7 +32,7 @@ A procedurally generated island-based environment and adaptive math‐learning g
 2. **Color‐Mapped Terrain**  
    ![Color Map](Assets/Images/Colormap.png)
 
-3. **Chunked LOD Around Player**  
+3. **Chunked LOD Around Player in Shaded Wireframe Mode**  
    ![Chunks LOD](Assets/Images/Chunks.png)
 
 4. **Playable Environment Showcase**  

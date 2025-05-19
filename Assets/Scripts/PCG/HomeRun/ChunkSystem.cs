@@ -1,29 +1,34 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ChunkSystem : MonoBehaviour {
+
+public class ChunkSystem : MonoBehaviour
+{
     public GameObject chunkPrefab;
     public GameObject player;
     public WorldGenerationParameters parameters;
-    public bool updateChunkgrid = true;
-    private Dictionary<(int,int), GameObject> chunks;
-    private Dictionary<(int,int), List<Vector3>> pathPointsOfChunk;
-    private (int,int) previousChunkIndex;
-    private (int,int) currentChunkIndex;
-    void Start() {
+    public bool updateChunkgrid;
+    private Dictionary<(int, int), GameObject> chunks;
+    private Dictionary<(int, int), List<Vector3>> pathPointsOfChunk;
+    private (int, int) previousChunkIndex;
+    private (int, int) currentChunkIndex;
+    void Start()
+    {
         if (!updateChunkgrid) return;
         WorldGenerationParameters parameters = WorldGenerationParameterSerialization.GetWorldGenerationParameters();
-        previousChunkIndex = (0,0);
+        previousChunkIndex = (0, 0);
         currentChunkIndex = previousChunkIndex;
         GenerateChunkGrid(parameters);
     }
 
-    void Update() {
+    void Update()
+    {
         if (!updateChunkgrid) return;
         player = GameObject.Find("Player");
         Vector3 playerPosition = player.transform.position;
-        (int,int) chunkIndex = (
+        (int, int) chunkIndex = (
                 (int)Math.Floor(
                     playerPosition.x / parameters.ScaledChunkSize()
                 ),
@@ -32,38 +37,55 @@ public class ChunkSystem : MonoBehaviour {
                 )
             );
 
-        if(chunkIndex != currentChunkIndex) {
+        if (chunkIndex != currentChunkIndex)
+        {
             previousChunkIndex = currentChunkIndex;
             currentChunkIndex = chunkIndex;
             UpdateChunks(chunkIndex, parameters);
         }
     }
-    public void GenerateChunkGrid(WorldGenerationParameters parameters) {
-        if(parameters == null) {
+    public void GenerateChunkGrid(WorldGenerationParameters parameters)
+    {
+        if (parameters == null)
+        {
             return;
         }
-        else {
+        else
+        {
             parameters.RevalidateParameters();
             this.parameters = parameters;
         }
 
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
         stopwatch.Start();
-
-        GeneratePath(parameters);
-        UpdateChunks(currentChunkIndex, parameters);
-        Debug.Log("Time taken: " + stopwatch.ElapsedMilliseconds + " ms");
+        try
+        {
+            GeneratePath(parameters);
+            UpdateChunks(currentChunkIndex, parameters);
+            Debug.Log("Time taken: " + stopwatch.ElapsedMilliseconds + " ms");
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            Debug.LogError("All retries failed, reloading scene.");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
     }
 
-    public void UpdateChunks((int,int) currentPosition, WorldGenerationParameters parameters) {
-        List<(int,int)> chunksToRemove = new List<(int,int)>(chunks.Keys);
+    public void UpdateChunks((int, int) currentPosition, WorldGenerationParameters parameters)
+    {
+        List<(int, int)> chunksToRemove = new List<(int, int)>(chunks.Keys);
 
         /* Add new chunks */
         int renderDistance = parameters.renderDistance;
-        for(int x = currentPosition.Item1 - renderDistance; x <= currentPosition.Item1 + renderDistance; x++) {
-            for(int z = currentPosition.Item2 - renderDistance; z <= currentPosition.Item2 + renderDistance; z++) {
-                (int, int) chunkIndex = (x,z);
-                if(!chunks.ContainsKey(chunkIndex)) {
+        for (int x = currentPosition.Item1 - renderDistance; x <= currentPosition.Item1 + renderDistance; x++)
+        {
+            for (int z = currentPosition.Item2 - renderDistance; z <= currentPosition.Item2 + renderDistance; z++)
+            {
+                (int, int) chunkIndex = (x, z);
+                if (!chunks.ContainsKey(chunkIndex))
+                {
                     /* Chunk not generated yet -> generate */
                     int chunkX = x * this.parameters.ScaledChunkSize();
                     int chunkZ = z * this.parameters.ScaledChunkSize();
@@ -71,7 +93,8 @@ public class ChunkSystem : MonoBehaviour {
                     chunk.GetComponent<ChunkGenerator>().GenerateDecoratedChunk(this.parameters, GetPathPointsOfNeighboringChunks(x, z));
                     chunks.Add(chunkIndex, chunk);
                 }
-                else {
+                else
+                {
                     /* Chunk already exists and is within render distance -> do not delete */
                     chunksToRemove.Remove(chunkIndex);
                 }
@@ -79,20 +102,26 @@ public class ChunkSystem : MonoBehaviour {
         }
 
         /* Remove old chunks */
-        foreach((int,int) chunkIndex in chunksToRemove) {
-            if (chunks.TryGetValue(chunkIndex, out GameObject chunk)) {
+        foreach ((int, int) chunkIndex in chunksToRemove)
+        {
+            if (chunks.TryGetValue(chunkIndex, out GameObject chunk))
+            {
                 DestroyImmediate(chunk);
                 chunks.Remove(chunkIndex);
             }
         }
     }
 
-    public List<List<Vector3>> GetPathPointsOfNeighboringChunks(int chunkIndexX, int chunkIndexZ) {
+    public List<List<Vector3>> GetPathPointsOfNeighboringChunks(int chunkIndexX, int chunkIndexZ)
+    {
         List<List<Vector3>> result = new();
-        for(int x = chunkIndexX - 1; x <= chunkIndexX + 1; x++) {
-            for(int z = chunkIndexZ - 1; z <= chunkIndexZ + 1; z++) {
+        for (int x = chunkIndexX - 1; x <= chunkIndexX + 1; x++)
+        {
+            for (int z = chunkIndexZ - 1; z <= chunkIndexZ + 1; z++)
+            {
                 List<Vector3> chunkPathPoints;
-                if(pathPointsOfChunk.TryGetValue((x,z), out chunkPathPoints)) {
+                if (pathPointsOfChunk.TryGetValue((x, z), out chunkPathPoints))
+                {
                     result.Add(chunkPathPoints);
                 }
             }
@@ -100,12 +129,13 @@ public class ChunkSystem : MonoBehaviour {
         return result;
     }
 
-    public void GeneratePath(WorldGenerationParameters parameters) {
+    public void GeneratePath(WorldGenerationParameters parameters)
+    {
         chunks = new();
         pathPointsOfChunk = new();
-        int withinChunkX = parameters.chunkSize/2;
+        int withinChunkX = parameters.chunkSize / 2;
         int withinChunkZ = 0;
-        (int,int) currentChunkIndex = (0,0);
+        (int, int) currentChunkIndex = (0, 0);
         Vector3 tangent = Vector3.forward;
 
         List<Vector3> pathPoints = new();
@@ -115,8 +145,9 @@ public class ChunkSystem : MonoBehaviour {
         float pathLength = 0;
         Direction direction = Direction.NORTH;
         int i = 0;
-        while(pathLength < desiredLength) {
-            if(direction == Direction.NORTHWEST || direction == Direction.NORTHEAST) print(direction + " in " + currentChunkIndex);
+        while (pathLength < desiredLength)
+        {
+            if (direction == Direction.NORTHWEST || direction == Direction.NORTHEAST) print(direction + " in " + currentChunkIndex);
             //print(direction + " " + currentChunk);
             /* Generate Heightmap */
             int chunkX = currentChunkIndex.Item1 * parameters.ScaledChunkSize();
@@ -131,12 +162,14 @@ public class ChunkSystem : MonoBehaviour {
             List<Vector3> newPoints;
             (withinChunkX, withinChunkZ, tangent, newPoints) = chunkGenerator.GeneratePathWithinChunk(pathPoints.Count > 0 ? pathPoints[pathPoints.Count - 1] : Vector3.zero, withinChunkX, withinChunkZ, parameters.chunkSize, tangent, direction, parameters);
             pathLength += Util.DeterminePathLength(newPoints);
-            if(pathLength > desiredLength) {
+            if (pathLength > desiredLength)
+            {
                 newPoints = ShortenPath(newPoints, pathLength - desiredLength);
             }
             pathPoints.AddRange(newPoints); //newPoints includes the point on the chunk border where the path stops, but not the one where it starts (except the chunk at (0,0))
             //Add points to current chunks' path segment
-            if(currentChunkIndex != (0,0)) {
+            if (currentChunkIndex != (0, 0))
+            {
                 newPoints.Insert(0, pathPoints[pathPoints.Count - 1 - newPoints.Count]); //add the last path point added before this iteration to the path points of the current chunk
             }
             pathPointsOfChunk.Add(currentChunkIndex, newPoints);
@@ -157,10 +190,12 @@ public class ChunkSystem : MonoBehaviour {
         }
 
         /* Create spline */
-        for(int j = 0; j < pathPoints.Count - 1; j++) {
-            float distance = (pathPoints[j]-pathPoints[j+1]).magnitude;
-            if(distance < parameters.minPathSegmentLength * parameters.scale) {
-                pathPoints.RemoveAt(j+1);
+        for (int j = 0; j < pathPoints.Count - 1; j++)
+        {
+            float distance = (pathPoints[j] - pathPoints[j + 1]).magnitude;
+            if (distance < parameters.minPathSegmentLength * parameters.scale)
+            {
+                pathPoints.RemoveAt(j + 1);
             }
         }
         SplineManagerNew splineManager = FindFirstObjectByType<SplineManagerNew>();
@@ -168,21 +203,30 @@ public class ChunkSystem : MonoBehaviour {
         // splineManager.GenerateParallelSplines();
     }
 
-    private List<Vector3> ShortenPath(List<Vector3> pathPoints, float distance) {
-        while(distance >= 0 && pathPoints.Count >= 2) {
-            Vector3 last = pathPoints[pathPoints.Count-1];
-            Vector3 beforeLast = pathPoints[pathPoints.Count-2];
-            distance -= (last-beforeLast).magnitude;
+    private List<Vector3> ShortenPath(List<Vector3> pathPoints, float distance)
+    {
+        while (distance >= 0 && pathPoints.Count >= 2)
+        {
+            Vector3 last = pathPoints[pathPoints.Count - 1];
+            Vector3 beforeLast = pathPoints[pathPoints.Count - 2];
+            distance -= (last - beforeLast).magnitude;
             pathPoints.Remove(last);
         }
         return pathPoints;
     }
 
-    public void DestroyChunkGrid() {
-        if(chunks == null) return;
-        foreach(GameObject chunk in chunks.Values) {
+    public void DestroyChunkGrid()
+    {
+        if (chunks == null) return;
+        foreach (GameObject chunk in chunks.Values)
+        {
             DestroyImmediate(chunk);
         }
         chunks.Clear();
     }
+}
+
+public class PathGenerationException : Exception
+{
+    public PathGenerationException(string message) : base(message) { }
 }
