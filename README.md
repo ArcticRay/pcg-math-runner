@@ -4,6 +4,10 @@ A procedurally generated island-based environment and adaptive math‐learning g
 
 ---
 
+![Island View](Assets/Images/island.jpeg)
+
+---
+
 ## 🚀 Features
 
 - **Procedural Island Generation**
