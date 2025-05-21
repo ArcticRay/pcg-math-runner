@@ -6,7 +6,8 @@ public class WorldGenerationParameters : ScriptableObject
 {
     public Daytime daytime;
     public WorldType worldType;
-    public string worldName;
+
+    public String worldName;
     public int walkDuration;
     public int chunkSize;
     public int scale;
@@ -25,13 +26,7 @@ public class WorldGenerationParameters : ScriptableObject
     public float maximumIncline;
     public int seaLevel;
     public int sandLevel;
-    public int snowLevel;
     public float hillyness;
-    public bool pineForestBiome;
-    public bool deciduousForestBiome;
-    public bool mixedForestBiome;
-    public bool fieldBiome;
-    public bool snowyMountain;
     public bool lakes;
 
     public WorldGenerationParameters()
@@ -57,13 +52,7 @@ public class WorldGenerationParameters : ScriptableObject
         maximumIncline = 0.2f;
         seaLevel = -160;
         sandLevel = -150;
-        snowLevel = 400;
         hillyness = 0.5f;
-        pineForestBiome = true;
-        deciduousForestBiome = true;
-        mixedForestBiome = true;
-        fieldBiome = true;
-        snowyMountain = true;
         lakes = true;
     }
 
@@ -76,7 +65,6 @@ public class WorldGenerationParameters : ScriptableObject
             renderDistance = 2;
             seaLevel = -120;
             sandLevel = -110;
-            snowLevel = int.MaxValue;
         }
         else if (worldType == WorldType.ISLAND)
         {

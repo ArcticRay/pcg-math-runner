@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
-using TMPro; 
+using TMPro;
 
 public class TaskSpawner : MonoBehaviour
 {
@@ -27,19 +27,19 @@ public class TaskSpawner : MonoBehaviour
             float3 forward = spline.EvaluateTangent(t);
             float3 up = spline.EvaluateUpVector(t);
             Quaternion rot = Quaternion.LookRotation(forward, up);
-            
 
-            Vector3 offset = rot * new Vector3(-20, 15f, 0); 
-            Vector3 newPos = (Vector3 )pos + offset;
+
+            Vector3 offset = rot * new Vector3(-20, 15f, 0);
+            Vector3 newPos = (Vector3)pos + offset;
 
             GameObject tafel = Instantiate(tafelPrefab, newPos, rot, transform);
             TafelDisplay display = tafel.GetComponent<TafelDisplay>();
 
             Task taskone = TaskGenerator.getNewTask();
 
-            string text = $" {taskone.getDigitOne() + " " + taskone.getOperator() + " " + taskone.getDigitTwo() + " = ?" }";
+            string text = $" {taskone.getDigitOne() + " " + taskone.getOperator() + " " + taskone.getDigitTwo() + " = ?"}";
 
-            display.SetText(text); 
+            display.SetText(text);
 
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class ChunkSystem : MonoBehaviour
+public class TerrainChunkSystem : MonoBehaviour
 {
     public GameObject chunkPrefab;
     public GameObject player;
@@ -70,7 +70,7 @@ public class ChunkSystem : MonoBehaviour
             Debug.LogError("All retries failed, reloading scene.");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        
+
     }
 
     public void UpdateChunks((int, int) currentPosition, WorldGenerationParameters parameters)
@@ -90,7 +90,7 @@ public class ChunkSystem : MonoBehaviour
                     int chunkX = x * this.parameters.ScaledChunkSize();
                     int chunkZ = z * this.parameters.ScaledChunkSize();
                     GameObject chunk = Instantiate(chunkPrefab, new Vector3(chunkX, 0, chunkZ), Quaternion.identity);
-                    chunk.GetComponent<ChunkGenerator>().GenerateDecoratedChunk(this.parameters, GetPathPointsOfNeighboringChunks(x, z));
+                    chunk.GetComponent<TerrainChunkGenerator>().GenerateDecoratedChunk(this.parameters, GetPathPointsOfNeighboringChunks(x, z));
                     chunks.Add(chunkIndex, chunk);
                 }
                 else
@@ -153,7 +153,7 @@ public class ChunkSystem : MonoBehaviour
             int chunkX = currentChunkIndex.Item1 * parameters.ScaledChunkSize();
             int chunkZ = currentChunkIndex.Item2 * parameters.ScaledChunkSize();
             GameObject currentChunkPrefab = Instantiate(chunkPrefab, new Vector3(chunkX, 0, chunkZ), Quaternion.identity);
-            ChunkGenerator chunkGenerator = currentChunkPrefab.GetComponent<ChunkGenerator>();
+            TerrainChunkGenerator chunkGenerator = currentChunkPrefab.GetComponent<TerrainChunkGenerator>();
             chunkGenerator.GenerateHeightMapChunk(parameters);
 
 

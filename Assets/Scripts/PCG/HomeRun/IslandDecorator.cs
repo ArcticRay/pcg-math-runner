@@ -10,22 +10,22 @@ public class IslandDecorator : Decorator
     public GameObject[] flowerPrefabs;
     public GameObject[] rockPrefabs;
     public GameObject[] cliffPrefabs;
-    public GameObject   waterPrefab;
+    public GameObject waterPrefab;
 
     [Header("Underwater Prefabs")]
     public GameObject[] underwaterPlantPrefabs;
-    [Range(0f,1f)] public float underwaterPlantDensity = 0.05f;
+    [Range(0f, 1f)] public float underwaterPlantDensity = 0.05f;
 
     [Header("Density Settings (0–1)")]
-    [Range(0f,1f)] public float palmDensity           = 0.01f;
-    [Range(0f,1f)] public float bushDensity           = 0.01f;
-    [Range(0f,1f)] public float flowerDensity         = 0.01f;
-    [Range(0f,1f)] public float rockDensity           = 0.002f;
-    [Range(0f,1f)] public float grassPatchDensity     = 0.1f;
-    [Range(0f,1f)] public float cliffDensity          = 0.001f;
-    public float cliffMinPathDistance                 = 500f;
-    [Range(0f,90f)] public float rockMaxSlope         = 40f;
-    [Range(0f,90f)] public float cliffMaxSlope        = 20f;
+    [Range(0f, 1f)] public float palmDensity = 0.01f;
+    [Range(0f, 1f)] public float bushDensity = 0.01f;
+    [Range(0f, 1f)] public float flowerDensity = 0.01f;
+    [Range(0f, 1f)] public float rockDensity = 0.002f;
+    [Range(0f, 1f)] public float grassPatchDensity = 0.1f;
+    [Range(0f, 1f)] public float cliffDensity = 0.001f;
+    public float cliffMinPathDistance = 500f;
+    [Range(0f, 90f)] public float rockMaxSlope = 40f;
+    [Range(0f, 90f)] public float cliffMaxSlope = 20f;
 
     [Header("Map Colors")]
     public Color deepWaterColor;
@@ -43,19 +43,16 @@ public class IslandDecorator : Decorator
             meshRenderer.material.SetFloat("_Sea_Level", parameters.seaLevel);
         if (meshRenderer.material.HasProperty("_Sand_Level"))
             meshRenderer.material.SetFloat("_Sand_Level", parameters.sandLevel);
-        if (meshRenderer.material.HasProperty("_Snow_Level"))
-            meshRenderer.material.SetFloat("_Snow_Level", parameters.snowLevel);
     }
 
-    public override void DecorateChunk(Mesh chunkMesh, ChunkGenerator chunkGenerator, WorldGenerationParameters parameters)
+    public override void DecorateChunk(Mesh chunkMesh, TerrainChunkGenerator chunkGenerator, WorldGenerationParameters parameters)
     {
-        Vector3[] vertices      = chunkMesh.vertices;
-        Vector3[] normals       = chunkMesh.normals;
+        Vector3[] vertices = chunkMesh.vertices;
+        Vector3[] normals = chunkMesh.normals;
         Vector2[] pathProximity = chunkMesh.uv3;
 
-        int seaLevel  = parameters.seaLevel;
+        int seaLevel = parameters.seaLevel;
         int sandLevel = parameters.sandLevel;
-        int snowLevel = parameters.snowLevel;
 
         var random = new System.Random(
             parameters.seed
@@ -102,7 +99,7 @@ public class IslandDecorator : Decorator
         {
             Vector3 worldPos = chunkGenerator.transform.position + vertices[i];
             float height = worldPos.y;
-            float slope  = Vector3.Angle(normals[i], Vector3.up);
+            float slope = Vector3.Angle(normals[i], Vector3.up);
 
             // Nur über Sand-Level
             if (height < sandLevel)
@@ -140,7 +137,7 @@ public class IslandDecorator : Decorator
             }
 
             // Büsche
-            if (random.NextDouble() < bushDensity && height < snowLevel)
+            if (random.NextDouble() < bushDensity)
             {
                 var (bush, _) = RandomGameObject(chunkGenerator, random, spawnNoisy, Quaternion.identity, bushPrefabs);
                 RandomUpscale(bush, random, 5, 15);
@@ -148,7 +145,7 @@ public class IslandDecorator : Decorator
             }
 
             // Blumen
-            if (random.NextDouble() < flowerDensity && height < snowLevel)
+            if (random.NextDouble() < flowerDensity)
             {
                 var (flower, _) = RandomGameObject(chunkGenerator, random, spawnNoisy, Quaternion.identity, flowerPrefabs);
                 RandomUpscale(flower, random, 3, 8);
@@ -164,7 +161,7 @@ public class IslandDecorator : Decorator
 
             // Gras-Patches nahe Pfad
             if (WithinDistanceToPath(pathProximity, i, 300f)
-             && random.NextDouble() < grassPatchDensity && height < snowLevel)
+             && random.NextDouble() < grassPatchDensity)
             {
                 var (grass, _) = RandomGameObject(
                     chunkGenerator, random, spawnNoisy,
@@ -182,18 +179,18 @@ public class IslandDecorator : Decorator
         int isoInterval
     )
     {
-        Vector3[] vertices      = chunkMesh.vertices;
-        Vector3[] normals       = chunkMesh.normals;
+        Vector3[] vertices = chunkMesh.vertices;
+        Vector3[] normals = chunkMesh.normals;
         Vector2[] pathProximity = chunkMesh.uv3;
-        Color[] colourMap       = new Color[vertices.Length];
+        Color[] colourMap = new Color[vertices.Length];
 
-        int dim    = (int)Math.Sqrt(vertices.Length);
+        int dim = (int)Math.Sqrt(vertices.Length);
         float maxIso = (parameters.MeshHeightMultiplier * 2.5f) / isoInterval;
 
         for (int i = 0; i < vertices.Length; i++)
         {
-            float h      = vertices[i].y + parameters.MeshHeightMultiplier;
-            int isoVal   = (int)(h / isoInterval);
+            float h = vertices[i].y + parameters.MeshHeightMultiplier;
+            int isoVal = (int)(h / isoInterval);
 
             if (WithinDistanceToPath(pathProximity, i, parameters.onPathDistance))
                 colourMap[i] = pathColor;
