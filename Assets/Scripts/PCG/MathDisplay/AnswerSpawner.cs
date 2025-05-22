@@ -15,6 +15,7 @@ public class AnswerSpawner : MonoBehaviour
 
 
         int randomizer = GetRandomBetweenMinus1And1();
+        int oldAnswer = 0;
 
         for (int i = -1; i <= 1; i++)
         {
@@ -22,6 +23,7 @@ public class AnswerSpawner : MonoBehaviour
             Vector3 answerPos = (Vector3)pos + offset;
 
             GameObject answerTafel = Instantiate(tafelPrefab, answerPos, rot, transform);
+
 
             var display = answerTafel.GetComponent<TafelDisplay>();
             if (display != null)
@@ -34,12 +36,17 @@ public class AnswerSpawner : MonoBehaviour
                 else
                 {
                     int newAnswer = UnityEngine.Random.Range(1, 20);
+                    if (newAnswer == oldAnswer)
+                    {
+                        newAnswer++;
+                    }
                     if (newAnswer == answer)
                     {
                         newAnswer++;
                     }
                     display.SetText(newAnswer.ToString());
                     answerTafel.tag = "False";
+                    oldAnswer = newAnswer;
                 }
 
             }
