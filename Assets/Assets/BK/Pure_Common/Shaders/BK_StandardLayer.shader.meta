@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f560932f44076e9438f038943604f8f5
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 
+  assetPath: Assets/BK/Pure_Common/Shaders/BK_StandardLayer.shader
+  uploadId: 0

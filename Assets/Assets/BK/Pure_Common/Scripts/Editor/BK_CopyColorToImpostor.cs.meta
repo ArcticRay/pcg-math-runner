@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c405287c1c4d6134e93a7c479e5d5ba0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269112
+  packageName: 'Pure Nature 2 : Islands'
+  packageVersion: 2.1
+  assetPath: Assets/BK/Pure_Common/Scripts/Editor/BK_CopyColorToImpostor.cs
+  uploadId: 744931
