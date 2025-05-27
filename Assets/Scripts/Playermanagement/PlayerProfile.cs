@@ -10,7 +10,7 @@ public class PlayerProfile
     public PlayerProfile(string playerName)
     {
         this.playerName = playerName;
-        this.playerLevel = 0;
+        this.playerLevel = 1;
         this.playerXP = 0;
     }
 
@@ -45,4 +45,3 @@ public class PlayerProfile
     }
 }
 
-// implemented basic player management and leveling system

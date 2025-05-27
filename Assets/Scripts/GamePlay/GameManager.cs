@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     private PlayerProfile currentProfile;
 
-    private string name;
+    private string playerName;
 
     void Start()
     {
@@ -13,6 +13,6 @@ public class GameManager : MonoBehaviour
 
         ProfileManager.SaveProfile(currentProfile);
 
-        // currentProfile = ProfileManager.LoadProfile(name);
+        // currentProfile = ProfileManager.LoadProfile(playerName);
     }
 }
