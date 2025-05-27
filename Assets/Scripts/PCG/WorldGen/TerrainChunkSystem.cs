@@ -185,7 +185,7 @@ public class TerrainChunkSystem : MonoBehaviour
 
 
             /* Prevent freeze of application in case of error */
-            if (i == 100) throw new Exception("Too many iterations in chunk system");
+            if (i == 100) throw new Exception("Too many iterations in terrain chunk system");
             i++;
         }
 
@@ -200,7 +200,6 @@ public class TerrainChunkSystem : MonoBehaviour
         }
         SplineManagerNew splineManager = FindFirstObjectByType<SplineManagerNew>();
         splineManager.UseMasterControlPoints(pathPoints);
-        // splineManager.GenerateParallelSplines();
     }
 
     private List<Vector3> ShortenPath(List<Vector3> pathPoints, float distance)

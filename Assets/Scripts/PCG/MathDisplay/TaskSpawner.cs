@@ -44,7 +44,7 @@ public class TaskSpawner : MonoBehaviour
             GameObject tafel = Instantiate(tafelPrefab, newPos, rot, transform);
             TafelDisplay display = tafel.GetComponent<TafelDisplay>();
 
-            Task task = TaskGenerator.getNewTask();
+            Task task = TaskGenerator.GetNewTask();
             string taskText = $"{task.getDigitOne()} {task.getOperator()} {task.getDigitTwo()} = ?";
             display.SetText(taskText);
 
