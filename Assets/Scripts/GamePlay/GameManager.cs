@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
     private PlayerProfile currentProfile;
     private int sessionXP = 0;      // temp var
 
+    private int sessionXPGain = 0;
+
     void Start()
     {
 
@@ -13,11 +15,12 @@ public class GameManager : MonoBehaviour
         ProfileManager.SaveProfile(currentProfile);
 
         Debug.Log("Name: " + currentProfile.GetPlayerName());
+        Debug.Log("Difficulty: " + GameSettings.SelectedDifficultyIndex);
     }
 
-    public void OnTaskCompleted(int xpGained)
+    public void IncreaseXP(int xpGained)
     {
-        sessionXP += xpGained;       // ② XP in der Session sammeln
+        sessionXP += xpGained;
         Debug.Log($"+{xpGained} XP (Session total: {sessionXP})");
     }
 
@@ -33,6 +36,23 @@ public class GameManager : MonoBehaviour
 
         sessionXP = 0;
     }
+
+    public void TaskCompleted()
+    {
+        if (GameSettings.SelectedDifficultyIndex == 0)
+        {
+            IncreaseXP(10);
+        }
+        else if (GameSettings.SelectedDifficultyIndex == 1)
+        {
+            IncreaseXP(15);
+        }
+        else
+        {
+            IncreaseXP(20);
+        }
+    }
+
 
     // save if closed
     void OnApplicationQuit()

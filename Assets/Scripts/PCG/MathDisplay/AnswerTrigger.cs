@@ -15,7 +15,7 @@ public class AnswerTrigger : MonoBehaviour
             if (this.CompareTag("True"))
             {
                 Debug.Log("Spieler hat richtig geantwortet");
-                gameManager.OnTaskCompleted(10);
+                gameManager.TaskCompleted();
 
             }
             else
