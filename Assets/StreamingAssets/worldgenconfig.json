@@ -2,7 +2,7 @@
   "daytime": 1,
   "worldType": 0,
   "worldName": "Random",
-  "walkDuration": 10000,
+  "walkDuration": 8000,
   "chunkSize": 80,
   "scale": 10,
   "noisefactor": 2200.0,

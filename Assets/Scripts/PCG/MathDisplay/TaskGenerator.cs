@@ -8,7 +8,30 @@ public class TaskGenerator : MonoBehaviour
     {
         int one = UnityEngine.Random.Range(1, 11);
         int two = UnityEngine.Random.Range(1, 11);
-        return new Task(TaskType.ADD, one, two);
+
+        if (GameSettings.SelectedMapIndex == 0)
+        {
+            return new Task(TaskType.ADD, one, two);
+        }
+        else if (GameSettings.SelectedMapIndex == 1)
+        {
+            return new Task(TaskType.SUBTRACT, one, two);
+        }
+        else if (GameSettings.SelectedMapIndex == 2)
+        {
+            return new Task(TaskType.MULTIPLY, one, two);
+        }
+        else
+        {
+            while (one % two != 0 || one < two)
+            {
+                one++;
+            }
+            return new Task(TaskType.DIVIDE, one, two);
+        }
+
+
+
     }
 
     public static Task GetNewTask(TaskType taskType, PlayerProfile playerProfile)

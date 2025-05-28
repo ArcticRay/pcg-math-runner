@@ -14,6 +14,18 @@ public class TaskSpawner : MonoBehaviour
 
     private void Start()
     {
+        if (GameSettings.SelectedDifficultyIndex == 0)
+        {
+            tafelAnzahl = 10;
+        }
+        else if (GameSettings.SelectedDifficultyIndex == 1)
+        {
+            tafelAnzahl = 10;
+        }
+        else
+        {
+            tafelAnzahl = 20;
+        }
         SpawnTafeln();
     }
 
