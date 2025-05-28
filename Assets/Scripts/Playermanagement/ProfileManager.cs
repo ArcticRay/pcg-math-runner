@@ -3,34 +3,49 @@ using System.IO;
 
 public static class ProfileManager
 {
-    // saves profile in JSON
-    public static void SaveProfile(PlayerProfile profile)
-    {
-
-        string json = JsonUtility.ToJson(profile, true);
-
-
-        string fileName = profile.GetPlayerName() + ".json";
-        string path = Path.Combine(Application.persistentDataPath, fileName);
-
-        File.WriteAllText(path, json);
-
-        Debug.Log($"Profile saved to: {path}");
-    }
-
-    // Loads profile
-    public static PlayerProfile LoadProfile(string playerName)
+    // Path to StreamingAssets
+    private static string GetProfilePath(string playerName)
     {
         string fileName = playerName + ".json";
-        string path = Path.Combine(Application.persistentDataPath, fileName);
+        return Path.Combine(Application.streamingAssetsPath, fileName);
+    }
 
-        if (!File.Exists(path))
+    public static PlayerProfile LoadOrCreateProfile(string playerName)
+    {
+        string path = GetProfilePath(playerName);
+
+        if (File.Exists(path))
         {
-            Debug.LogWarning($"Profile {fileName} not found at {path}");
-            return null;
+            // Profile exists
+            string json = File.ReadAllText(path);
+            return JsonUtility.FromJson<PlayerProfile>(json);
         }
+        else
+        {
+            var newProfile = new PlayerProfile(playerName, level: 1, xp: 0, levelUPThreshold: 100);
+            SaveProfile(newProfile);
+            return newProfile;
+        }
+    }
 
-        string json = File.ReadAllText(path);
-        return JsonUtility.FromJson<PlayerProfile>(json);
+
+    public static void SaveProfile(PlayerProfile profile)
+    {
+        string json = JsonUtility.ToJson(profile, prettyPrint: true);
+        string path = GetProfilePath(profile.GetPlayerName());
+
+        try
+        {
+            File.WriteAllText(path, json);
+            Debug.Log($"Profile saved to: {path}");
+        }
+        catch (IOException e)
+        {
+            Debug.LogError($"Konnte Profil nicht speichern: {e.Message}");
+            // Fallback: in persistentDataPath schreiben
+            string fallbackPath = Path.Combine(Application.persistentDataPath, profile.GetPlayerName() + ".json");
+            File.WriteAllText(fallbackPath, json);
+            Debug.LogWarning($"Profil stattdessen hier gespeichert: {fallbackPath}");
+        }
     }
 }

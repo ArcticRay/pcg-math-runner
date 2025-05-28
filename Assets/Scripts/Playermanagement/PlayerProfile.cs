@@ -1,47 +1,46 @@
 using System;
+using UnityEngine;
+
 [Serializable]
 public class PlayerProfile
 {
-    string playerName;
-    int playerLevel;
-    int playerXP;
-    int xpThreshold = 20;
 
-    public PlayerProfile(string playerName)
+    public string playerName;
+    public int playerLevel;
+    public int xp;
+
+    public int levelUPThreshold;
+
+    public PlayerProfile() { }
+
+    public PlayerProfile(string name, int level = 1, int xp = 0, int levelUPThreshold = 100)
     {
-        this.playerName = playerName;
-        this.playerLevel = 1;
-        this.playerXP = 0;
+        this.playerName = name;
+        this.playerLevel = level;
+        this.xp = xp;
+        this.levelUPThreshold = levelUPThreshold;
     }
 
-    public string GetPlayerName()
-    {
-        return playerName;
-    }
+    public string GetPlayerName() => playerName;
+    public int GetPlayerLevel() => playerLevel;
+    public int GetXP() => xp;
 
-    public int GetPlayerLevel()
-    {
-        return playerLevel;
-    }
+    public void SetPlayerName(string name) => playerName = name;
+    public void SetPlayerLevel(int level) => playerLevel = level;
+    public void SetXP(int xpAmount) => xp = xpAmount;
 
-    public int GetPlayerXP()
+    public void IncreasePlayerXP(int amount)
     {
-        return playerXP;
-    }
-
-    public void IncreasePlayerXP(int xpIncrease)
-    {
-        playerXP = playerXP + xpIncrease;
-        if (playerXP > xpThreshold)
+        xp += amount;
+        if (xp > levelUPThreshold)
         {
             LevelUP();
+            levelUPThreshold += (100 * playerLevel);
         }
     }
 
-    void LevelUP()
+    public void LevelUP()
     {
         playerLevel = playerLevel + 1;
-        xpThreshold = xpThreshold + xpThreshold + (playerLevel * 5);
     }
 }
-
