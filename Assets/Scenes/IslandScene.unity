@@ -453,6 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 294402095}
   tafelPrefab: {fileID: 5285991144830722408, guid: 0b0cf0f98dd644d789ee633a16b01c76, type: 3}
+  finishPrefab: {fileID: 5285991144830722408, guid: 995c98a1a0deb41c1b4da33db1e8f9d0, type: 3}
   tafelAnzahl: 20
   answerSpawner: {fileID: 2061500274}
 --- !u!4 &493965974

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Task 
+public class Task
 {
     TaskType type;
     int digit1;
@@ -28,11 +28,11 @@ public class Task
 
         if (type == TaskType.ADD)
             op = "+";
-            else if (type == TaskType.SUBTRACT)
+        else if (type == TaskType.SUBTRACT)
             op = "-";
-            else if (type == TaskType.MULTIPLY)
+        else if (type == TaskType.MULTIPLY)
             op = "x";
-            else if (type == TaskType.DIVIDE)
+        else if (type == TaskType.DIVIDE)
             op = "/";
 
         return op;
@@ -49,7 +49,7 @@ public class Task
                 break;
 
             case TaskType.SUBTRACT:
-                result = digit1 + digit2;
+                result = digit1 - digit2;
                 break;
 
             case TaskType.MULTIPLY:
