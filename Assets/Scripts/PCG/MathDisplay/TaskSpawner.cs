@@ -7,6 +7,7 @@ public class TaskSpawner : MonoBehaviour
 {
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private GameObject tafelPrefab;
+    [SerializeField] private GameObject finishPrefab;
     [SerializeField] private int tafelAnzahl = 20;
     [SerializeField] private AnswerSpawner answerSpawner;
 
@@ -27,6 +28,7 @@ public class TaskSpawner : MonoBehaviour
             tafelAnzahl = 20;
         }
         SpawnTafeln();
+        SpawnFinish();
     }
 
     private void SpawnTafeln()
@@ -43,7 +45,7 @@ public class TaskSpawner : MonoBehaviour
 
         for (int i = 0; i < tafelAnzahl; i++)
         {
-            float t = i / (float)(tafelAnzahl - 1);
+            float t = i / (float)(tafelAnzahl);
 
             float3 pos = spline.EvaluatePosition(t);
             float3 forward = spline.EvaluateTangent(t);
@@ -65,5 +67,23 @@ public class TaskSpawner : MonoBehaviour
                 answerSpawner.SpawnAnswerTafel(spline, (t + answerOffset), task.getResult());
             }
         }
+    }
+
+    private void SpawnFinish()
+    {
+        Spline spline = splineContainer.Spline;
+        float3 pos = spline.EvaluatePosition(0.99f);
+        float3 forward = spline.EvaluateTangent(0.99f);
+        float3 up = spline.EvaluateUpVector(0.99f);
+        Quaternion rot = Quaternion.LookRotation(forward, up);
+
+        Vector3 offset = rot * new Vector3(-20, 15f, 0);
+        Vector3 newPos = (Vector3)pos + offset;
+
+        GameObject tafel = Instantiate(finishPrefab, newPos, rot, transform);
+        TafelDisplay display = tafel.GetComponent<TafelDisplay>();
+
+        string goaltext = $"Ziel";
+        display.SetText(goaltext);
     }
 }
