@@ -16,6 +16,7 @@ public class PlayerSplineFollower : MonoBehaviour
     [Header("Lane Settings")]
     // -1 = links, 0 = center, 1 = rechts
     private int targetLane = 0;
+    private int onLane = 0;
     private float currentLateralOffset = 0f;  // Lerp-basierter Wert für den aktuellen Seitversatz
     public float laneOffset = 20f;
 
@@ -30,7 +31,7 @@ public class PlayerSplineFollower : MonoBehaviour
     {
 
         float speed = baseSpeed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             anim.SetBool("IsRunning", true);
             speed *= sprintMultiplier;
@@ -53,10 +54,29 @@ public class PlayerSplineFollower : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
+            if (onLane == -1)
+            {
+                onLane = -1;
+            }
+            else
+            {
+                onLane = onLane - 1;
+                anim.SetTrigger("Left");
+            }
             targetLane = Mathf.Clamp(targetLane - 1, -1, 1);
+
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
+            if (onLane == 1)
+            {
+                onLane = 1;
+            }
+            else
+            {
+                onLane = onLane + 1;
+                anim.SetTrigger("Right");
+            }
             targetLane = Mathf.Clamp(targetLane + 1, -1, 1);
         }
 

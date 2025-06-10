@@ -22,10 +22,5 @@
   "sandLevel": 10,
   "snowLevel": 400,
   "hillyness": 0.16045775413513186,
-  "pineForestBiome": true,
-  "deciduousForestBiome": true,
-  "mixedForestBiome": true,
-  "fieldBiome": true,
-  "snowyMountain": true,
   "lakes": true
 }

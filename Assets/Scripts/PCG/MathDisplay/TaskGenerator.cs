@@ -15,6 +15,12 @@ public class TaskGenerator : MonoBehaviour
         }
         else if (GameSettings.SelectedMapIndex == 1)
         {
+            if (one < two)
+            {
+                int temp = one;
+                one = two;
+                two = temp;
+            }
             return new Task(TaskType.SUBTRACT, one, two);
         }
         else if (GameSettings.SelectedMapIndex == 2)
@@ -23,6 +29,7 @@ public class TaskGenerator : MonoBehaviour
         }
         else
         {
+            one = UnityEngine.Random.Range(1, 30);
             while (one % two != 0 || one < two)
             {
                 one++;
