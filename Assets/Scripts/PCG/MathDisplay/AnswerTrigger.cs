@@ -13,6 +13,13 @@ public class AnswerTrigger : MonoBehaviour
     [Tooltip("Sound für eine falsche Antwort.")]
     public AudioClip wrongClip;
 
+    private GameUI gameUI;
+
+    void Awake()
+    {
+        gameUI = FindFirstObjectByType<GameUI>();
+    }
+
     void Start()
     {
         gameManager = (GameManager)FindFirstObjectByType(typeof(GameManager));
@@ -26,6 +33,7 @@ public class AnswerTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        gameUI.HidePopup();
         if (!other.CompareTag("Player"))
             return;
 
