@@ -2376,6 +2376,7 @@ MonoBehaviour:
   sprintMultiplier: 1.5
   laneSwitchSpeed: 4
   laneOffset: 20
+  laneSwitchCooldown: 0.75
   anim: {fileID: 476394474}
   rb: {fileID: 476394473}
 --- !u!4 &1700665686

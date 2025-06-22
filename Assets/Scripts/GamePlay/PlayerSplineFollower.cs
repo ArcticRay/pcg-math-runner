@@ -13,22 +13,27 @@ public class PlayerSplineFollower : MonoBehaviour
     public float baseSpeed = 5f;
     public float sprintMultiplier = 1.5f;
     public float laneSwitchSpeed = 5f;
-    [Header("Lane Settings")]
-    // -1 = links, 0 = center, 1 = rechts
-    private int targetLane = 0;
-    private int onLane = 0;
-    private float currentLateralOffset = 0f;  // Lerp-basierter Wert für den aktuellen Seitversatz
-    public float laneOffset = 20f;
 
-    // Progress along the spline
+    [Header("Lane Settings")]
+    public float laneOffset = 20f;
+    // Lane-Indices: -1 = links, 0 = center, 1 = rechts
+    private int targetLane = 0;
+    private float currentLateralOffset = 0f;
+
+    [Header("Spurwechsel-Cooldown")]
+    public float laneSwitchCooldown = 0.5f; // Time in Seconds
+    private float switchTimer = 0f;
+
+    // progress on lane
     private float progress = 0f;
 
     public Animator anim;
     public Rigidbody rb;
 
-
     void Update()
     {
+        if (switchTimer > 0f)
+            switchTimer -= Time.deltaTime;
 
         float speed = baseSpeed;
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
@@ -51,46 +56,38 @@ public class PlayerSplineFollower : MonoBehaviour
             anim.SetBool("IsJogging", false);
         }
 
-
-        if (Input.GetKeyDown(KeyCode.A))
+        if (switchTimer <= 0f)
         {
-            if (onLane == -1)
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                onLane = -1;
+                if (targetLane > -1)
+                {
+                    targetLane--;
+                    anim.SetTrigger("Left");
+                    switchTimer = laneSwitchCooldown;
+                }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.D))
             {
-                onLane = onLane - 1;
-                anim.SetTrigger("Left");
+                if (targetLane < 1)
+                {
+                    targetLane++;
+                    anim.SetTrigger("Right");
+                    switchTimer = laneSwitchCooldown;
+                }
             }
-            targetLane = Mathf.Clamp(targetLane - 1, -1, 1);
-
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (onLane == 1)
-            {
-                onLane = 1;
-            }
-            else
-            {
-                onLane = onLane + 1;
-                anim.SetTrigger("Right");
-            }
-            targetLane = Mathf.Clamp(targetLane + 1, -1, 1);
         }
 
+        // calculate spline position
         int numSegments = centerSplineContainer.Spline.Count - 1;
         float totalLength = numSegments * segmentLength;
-
-        float t = (totalLength > 0f) ? progress / totalLength : 0f;
+        float t = totalLength > 0f ? progress / totalLength : 0f;
         t = Mathf.Clamp01(t);
 
         float3 posF3 = centerSplineContainer.EvaluatePosition(t);
         Vector3 pos = (Vector3)posF3;
         float3 tangentF3 = centerSplineContainer.EvaluateTangent(t);
         Vector3 tangent = ((Vector3)tangentF3).normalized;
-
         Vector3 rightVec = Vector3.Cross(Vector3.up, tangent).normalized;
 
         float desiredOffset = targetLane * laneOffset;
@@ -98,13 +95,11 @@ public class PlayerSplineFollower : MonoBehaviour
 
         Vector3 finalPos = pos + rightVec * currentLateralOffset;
         finalPos.y = pos.y;
-
         transform.position = finalPos;
 
+        // set forward direction
         Vector3 horizontalTangent = new Vector3(tangent.x, 0, tangent.z).normalized;
         if (horizontalTangent.sqrMagnitude > 0.001f)
-        {
             transform.forward = horizontalTangent;
-        }
     }
 }

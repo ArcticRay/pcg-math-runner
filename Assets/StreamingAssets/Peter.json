@@ -1,6 +1,6 @@
 {
     "playerName": "Peter",
-    "playerLevel": 1,
-    "xp": 90,
-    "levelUPThreshold": 100
+    "playerLevel": 2,
+    "xp": 150,
+    "levelUPThreshold": 300
 }

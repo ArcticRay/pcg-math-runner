@@ -379,7 +379,6 @@ public class TerrainChunkGenerator : MonoBehaviour
         int length = heightMap.GetLength(1);
 
         Vector2[] octaveOffset = GenerateOctaveOffsets(wgParams.seed, 1, offset);
-        // Mountain, Plains, Swamp, Pine Forest, Mixed Forest, Leaf Forest
         for (int z = 0; z < width; z++)
         {
             for (int x = 0; x < length; x++)
