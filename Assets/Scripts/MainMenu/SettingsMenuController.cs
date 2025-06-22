@@ -55,4 +55,10 @@ public class SettingsMenuController : MonoBehaviour
         GameSettings.SelectedDifficultyIndex = difficultyDropdown.value;
         SceneManager.LoadScene("IslandScene");
     }
+
+    public void OnEndGame()
+    {
+        Debug.Log("Spiel wird beendet");
+        Application.Quit();
+    }
 }
