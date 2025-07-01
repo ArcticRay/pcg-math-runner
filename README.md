@@ -32,8 +32,8 @@ A procedurally generated island-based environment and adaptive math‐learning g
 
 ## 📸 Screenshots
 
-|    **Raw Perlin‐Noise Heightmap**     |         **Color‐Mapped Terrain**         |
-| :-----------------------------------: | :--------------------------------------: |
+| **Raw Perlin‐Noise Heightmap** | **Color‐Mapped Terrain** |
+|:------------------------------:|:------------------------:|
 | ![Heightmap](Assets/Images/Noise.png) | ![Color Map](Assets/Images/Colormap.png) |
 
 3. **Chunked LOD Around Player in Shaded Wireframe Mode**  
