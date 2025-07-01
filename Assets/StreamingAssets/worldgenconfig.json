@@ -8,7 +8,7 @@
   "noisefactor": 2200.0,
   "octaves": 7,
   "persistence": 0.4300000071525574,
-  "lacunarity": 1.5,
+  "lacunarity": 1.8,
   "seed": 187,
   "MeshHeightMultiplier": 400.0,
   "renderDistance": 4,

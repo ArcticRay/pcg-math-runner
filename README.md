@@ -1,3 +1,5 @@
+![status: WIP](https://img.shields.io/badge/status-WIP-yellow)
+
 # PCG Math Runner
 
 A procedurally generated island-based environment and adaptive math‐learning game in one. Create your player profile, explore ever-changing islands, and sharpen your math skills with dynamically tailored challenges.
