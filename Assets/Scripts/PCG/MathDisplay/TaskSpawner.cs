@@ -21,7 +21,7 @@ public class TaskSpawner : MonoBehaviour
         }
         else if (GameSettings.SelectedDifficultyIndex == 1)
         {
-            tafelAnzahl = 10;
+            tafelAnzahl = 15;
         }
         else
         {
@@ -64,7 +64,7 @@ public class TaskSpawner : MonoBehaviour
 
             if (answerSpawner != null)
             {
-                answerSpawner.SpawnAnswerTafel(spline, (t + answerOffset), task.getResult());
+                answerSpawner.SpawnAnswerTafel(spline, (t + answerOffset), task.getResult(), task.getDigitOne(), task.getDigitTwo(), task.GetTaskType());
             }
         }
     }

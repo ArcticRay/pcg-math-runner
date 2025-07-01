@@ -1,6 +1,9 @@
 {
     "playerName": "Jan",
-    "playerLevel": 1,
-    "xp": 0,
-    "levelUPThreshold": 100
+    "playerLevel": 2,
+    "xp": 120,
+    "levelUPThreshold": 300,
+    "mmr": 1129,
+    "rank": 1,
+    "rankedChange": 1
 }

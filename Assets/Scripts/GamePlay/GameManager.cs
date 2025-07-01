@@ -1,11 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private PlayerProfile currentProfile;
-    private int sessionXP = 0;      // temp var
-
-    private int sessionXPGain = 0;
+    private int sessionXP = 0;
 
     void Start()
     {
@@ -32,6 +31,7 @@ public class GameManager : MonoBehaviour
 
         ProfileManager.SaveProfile(currentProfile);
 
+
         Debug.Log($"Run beendet: {sessionXP} XP hinzugefügt. Neuer Stand: Lvl {currentProfile.GetPlayerLevel()}, XP {currentProfile.GetXP()}");
 
         sessionXP = 0;
@@ -42,15 +42,28 @@ public class GameManager : MonoBehaviour
         if (GameSettings.SelectedDifficultyIndex == 0)
         {
             IncreaseXP(10);
+            UpdateMMR(1);
         }
         else if (GameSettings.SelectedDifficultyIndex == 1)
         {
             IncreaseXP(15);
+            UpdateMMR(2);
         }
         else
         {
             IncreaseXP(20);
+            UpdateMMR(40);
         }
+    }
+
+    public void TaskUncompleted()
+    {
+        UpdateMMR(-2);
+    }
+
+    public void UpdateMMR(int change)
+    {
+        currentProfile.UpdateMMR(change);
     }
 
 

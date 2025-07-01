@@ -1,6 +1,8 @@
 {
     "playerName": "Peter",
-    "playerLevel": 2,
-    "xp": 150,
-    "levelUPThreshold": 300
+    "playerLevel": 3,
+    "xp": 360,
+    "levelUPThreshold": 600,
+    "mmr": 1680,
+    "rank": 6
 }

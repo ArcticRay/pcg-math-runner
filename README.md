@@ -1,3 +1,5 @@
+![status: WIP](https://img.shields.io/badge/status-WIP-yellow)
+
 # PCG Math Runner
 
 A procedurally generated island-based environment and adaptive math‐learning game in one. Create your player profile, explore ever-changing islands, and sharpen your math skills with dynamically tailored challenges.
@@ -30,11 +32,9 @@ A procedurally generated island-based environment and adaptive math‐learning g
 
 ## 📸 Screenshots
 
-1. **Raw Perlin‐Noise Heightmap**  
-   ![Heightmap](Assets/Images/Noise.png)
-
-2. **Color‐Mapped Terrain**  
-   ![Color Map](Assets/Images/Colormap.png)
+|    **Raw Perlin‐Noise Heightmap**     |         **Color‐Mapped Terrain**         |
+| :-----------------------------------: | :--------------------------------------: |
+| ![Heightmap](Assets/Images/Noise.png) | ![Color Map](Assets/Images/Colormap.png) |
 
 3. **Chunked LOD Around Player in Shaded Wireframe Mode**  
    ![Chunks LOD](Assets/Images/Chunks.png)

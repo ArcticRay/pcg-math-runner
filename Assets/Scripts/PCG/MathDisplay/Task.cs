@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Task
@@ -5,7 +6,9 @@ public class Task
     TaskType type;
     int digit1;
     int digit2;
-    public Task(TaskType taskType, int digit1, int digit2)
+
+    int difficulty;
+    public Task(TaskType taskType, int digit1, int digit2, int difficulty)
     {
         this.digit1 = digit1;
         this.digit2 = digit2;
@@ -20,6 +23,11 @@ public class Task
     public int getDigitTwo()
     {
         return digit2;
+    }
+
+    public TaskType GetTaskType()
+    {
+        return type;
     }
 
     public string getOperator()
