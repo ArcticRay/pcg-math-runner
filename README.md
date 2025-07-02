@@ -39,6 +39,9 @@ A procedurally generated island-based environment and adaptive math‐learning g
 3. **Chunked LOD Around Player in Shaded Wireframe Mode**  
    ![Chunks LOD](Assets/Images/Chunks.png)
 
-4. **Playable Environment Showcase**  
+4. **User Interface**  
+   ![Main Menu](Assets/Images/main_menu.jpeg)
+
+5. **Playable Environment Showcase**  
    ![Island View](Assets/Images/island.jpeg)  
    ![Path View](Assets/Images/path.jpeg)
