@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         else
         {
             IncreaseXP(20);
-            UpdateMMR(40);
+            UpdateMMR(4);
         }
     }
 

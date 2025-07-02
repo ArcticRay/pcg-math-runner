@@ -32,7 +32,7 @@ public class MeshGenerator : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         mesh = new Mesh();
-        
+
     }
 
     // Update is called once per frame
@@ -43,13 +43,13 @@ public class MeshGenerator : MonoBehaviour
         p1 = position + (right * width);
         p2 = position + (-right * width);
 
-        GenerateMesh(p1, p2, p1 +1 , p2+ 1);
+        GenerateMesh(p1, p2, p1 + 1, p2 + 1);
 
     }
 
     void GetPoints()
     {
-        
+
     }
 
     void GenerateMesh(float3 p1, float3 p2, float3 p3, float3 p4)
@@ -85,6 +85,6 @@ public class MeshGenerator : MonoBehaviour
 
         // Mesh dem MeshFilter zuweisen
         meshFilter.mesh = mesh;
-        
+
     }
 }

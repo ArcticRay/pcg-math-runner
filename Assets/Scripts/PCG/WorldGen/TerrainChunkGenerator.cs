@@ -8,6 +8,9 @@ public class TerrainChunkGenerator : MonoBehaviour
     public AnimationCurve convergenceToPath;
     public AnimationCurve terrainCurve;
 
+    public Material grassMaterial;
+    public Material sandMaterial;
+
     private Vector2 offset;
     private float[,] heightMap;
     private float[,] distanceToPath;
@@ -38,7 +41,6 @@ public class TerrainChunkGenerator : MonoBehaviour
         /* Mesh Creation */
         Vector3 vertexFromHeightMapPosition(int x, int z) => new(x * parameters.scale, heightMap[x, z] * parameters.MeshHeightMultiplier, z * parameters.scale);
         Mesh mesh = GenerateMesh(heightMap, vertexFromHeightMapPosition);
-        // AddBiomeInformation(mesh, parameters, heightMap.GetLength(0), heightMap.GetLength(1), offset);
         AddPathClosenessInformation(mesh, heightMap.GetLength(0), heightMap.GetLength(1), distanceToPath);
 
         /* Setting Mesh */
@@ -472,7 +474,6 @@ public class TerrainChunkGenerator : MonoBehaviour
     {
         Vector2[] pathClosenessUVs = new Vector2[width * length];
         int index = 0;
-        // Mountain, Plains, Swamp, Pine Forest, Mixed Forest, Leaf Forest
         for (int z = 0; z < width; z++)
         {
             for (int x = 0; x < length; x++)
@@ -491,6 +492,6 @@ public class TerrainChunkGenerator : MonoBehaviour
 
     public enum Biome
     {
-        MOUNTAINS, PLAINS, PINE_FOREST, DECIDUOUS_FOREST, MIXED_FOREST, SWAMP
+        MOUNTAINS
     }
 }
