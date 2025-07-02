@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class IslandDecorator : Decorator
@@ -19,7 +20,7 @@ public class IslandDecorator : Decorator
     [Header("Density Settings (0–1)")]
     [Range(0f, 1f)] public float palmDensity = 0.01f;
     [Range(0f, 1f)] public float bushDensity = 0.01f;
-    [Range(0f, 1f)] public float flowerDensity = 0.01f;
+    [Range(0f, 1f)] public float flowerDensity = 0.05f;
     [Range(0f, 1f)] public float rockDensity = 0.002f;
     [Range(0f, 1f)] public float grassPatchDensity = 0.1f;
     [Range(0f, 1f)] public float cliffDensity = 0.001f;
@@ -36,13 +37,23 @@ public class IslandDecorator : Decorator
     public Color vegetationHighColor;
     public Color pathColor;
 
+    public Material grassMaterial;
+    public Material sandMaterial;
+
+    public float sandThreshold = 20f;
+
     public override void ApplyShader(MeshRenderer meshRenderer, WorldGenerationParameters parameters)
     {
-        base.ApplyShader(meshRenderer, parameters);
-        if (meshRenderer.material.HasProperty("_Sea_Level"))
-            meshRenderer.material.SetFloat("_Sea_Level", parameters.seaLevel);
-        if (meshRenderer.material.HasProperty("_Sand_Level"))
-            meshRenderer.material.SetFloat("_Sand_Level", parameters.sandLevel);
+        meshRenderer.materials = new Material[]{
+        sandMaterial,
+        grassMaterial
+    };
+
+        // base.ApplyShader(meshRenderer, parameters);
+        // if (meshRenderer.material.HasProperty("_Sea_Level"))
+        //    meshRenderer.material.SetFloat("_Sea_Level", parameters.seaLevel);
+        // if (meshRenderer.material.HasProperty("_Sand_Level"))
+        //     meshRenderer.material.SetFloat("_Sand_Level", parameters.sandLevel);
     }
 
     public override void DecorateChunk(Mesh chunkMesh, TerrainChunkGenerator chunkGenerator, WorldGenerationParameters parameters)
@@ -170,6 +181,33 @@ public class IslandDecorator : Decorator
                 grass.transform.localScale = new Vector3(20f, 15f, 20f);
             }
         }
+
+        SplitMeshByHeight(chunkMesh, sandThreshold);
+    }
+
+    private void SplitMeshByHeight(Mesh mesh, float threshold)
+    {
+        var verts = mesh.vertices;
+        var tris = mesh.triangles;
+        var grassTris = new List<int>();
+        var sandTris = new List<int>();
+
+        for (int i = 0; i < tris.Length; i += 3)
+        {
+            float avgY = (verts[tris[i + 0]].y
+                        + verts[tris[i + 1]].y
+                        + verts[tris[i + 2]].y) / 3f;
+
+            if (avgY < threshold)
+                grassTris.AddRange(new[] { tris[i + 0], tris[i + 1], tris[i + 2] });
+            else
+                sandTris.AddRange(new[] { tris[i + 0], tris[i + 1], tris[i + 2] });
+        }
+
+        mesh.subMeshCount = 2;
+        mesh.SetTriangles(grassTris.ToArray(), 0);
+        mesh.SetTriangles(sandTris.ToArray(), 1);
+        mesh.RecalculateNormals();
     }
 
     public override Texture2D CreateMap(

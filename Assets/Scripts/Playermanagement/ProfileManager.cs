@@ -42,7 +42,6 @@ public static class ProfileManager
         catch (IOException e)
         {
             Debug.LogError($"Konnte Profil nicht speichern: {e.Message}");
-            // Fallback: in persistentDataPath schreiben
             string fallbackPath = Path.Combine(Application.persistentDataPath, profile.GetPlayerName() + ".json");
             File.WriteAllText(fallbackPath, json);
             Debug.LogWarning($"Profil stattdessen hier gespeichert: {fallbackPath}");

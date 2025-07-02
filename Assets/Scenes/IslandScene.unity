@@ -2915,6 +2915,9 @@ MonoBehaviour:
   vegetationLowColor: {r: 0, g: 0, b: 0, a: 0}
   vegetationHighColor: {r: 0, g: 0, b: 0, a: 0}
   pathColor: {r: 0.9622642, g: 0.516764, b: 0.34042364, a: 0}
+  grassMaterial: {fileID: 2100000, guid: fdf8a336fcf14b588f25253c8474898d, type: 2}
+  sandMaterial: {fileID: 2100000, guid: 90fc46d044124b99aac1c50316fa8f00, type: 2}
+  sandThreshold: 20
 --- !u!4 &1927535539
 Transform:
   m_ObjectHideFlags: 0
