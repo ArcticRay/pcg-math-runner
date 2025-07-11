@@ -5,16 +5,29 @@ public class GameManager : MonoBehaviour
 {
     private PlayerProfile currentProfile;
     private int sessionXP = 0;
+    [SerializeField]
+    TaskSpawner taskSpawner;
+
+    private Difficulty rank;
 
     void Start()
     {
 
         currentProfile = ProfileManager.LoadOrCreateProfile(GameSettings.PlayerName);
+        this.rank = currentProfile.GetRank();
 
         ProfileManager.SaveProfile(currentProfile);
 
         Debug.Log("Name: " + currentProfile.GetPlayerName());
         Debug.Log("Difficulty: " + GameSettings.SelectedDifficultyIndex);
+        Debug.Log("Rank: " + rank);
+
+
+    }
+
+    public void GenerateTask()
+    {
+        taskSpawner.StartTafelSpawn(rank);
     }
 
     public void IncreaseXP(int xpGained)

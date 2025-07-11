@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TaskGenerator : MonoBehaviour
 {
-    public static Task GetNewTask()
+    public static Task GetNewTask(Difficulty diff)
     {
         int one;
         int two;
-        int difficulty = 1;
+        int difficulty = (int)diff;
+
 
         if (GameSettings.SelectedMapIndex == 0)
         {
@@ -49,7 +50,7 @@ public class TaskGenerator : MonoBehaviour
 
     public static Task GetNewTask(TaskType taskType, PlayerProfile playerProfile)
     {
-        return new Task(TaskType.ADD, 1, 2, 1);
+        return new Task(taskType, 1, 2, 1);
     }
 }
 

@@ -8,12 +8,14 @@ public class TerrainChunkSystem : MonoBehaviour
 {
     public GameObject chunkPrefab;
     public GameObject player;
+    public GameManager gameManager;
     public WorldGenerationParameters parameters;
     public bool updateChunkgrid;
     private Dictionary<(int, int), GameObject> chunks;
     private Dictionary<(int, int), List<Vector3>> pathPointsOfChunk;
     private (int, int) previousChunkIndex;
     private (int, int) currentChunkIndex;
+
     void Start()
     {
         if (!updateChunkgrid) return;
@@ -63,6 +65,7 @@ public class TerrainChunkSystem : MonoBehaviour
             GeneratePath(parameters);
             UpdateChunks(currentChunkIndex, parameters);
             Debug.Log("Time taken: " + stopwatch.ElapsedMilliseconds + " ms");
+            gameManager.GenerateTask();
         }
         catch (Exception e)
         {
