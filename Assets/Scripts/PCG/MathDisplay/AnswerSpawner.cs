@@ -70,8 +70,9 @@ public class AnswerSpawner : MonoBehaviour
         switch (taskType)
         {
             case TaskType.ADD:
-                candidates.Add(a);
-                candidates.Add(b);
+                candidates.Add(a + b + 1);
+                candidates.Add(a + b - 1);
+                candidates.Add((a + b + b / 10));
                 candidates.Add(correct + (_rnd.Next(0, 2) == 0 ? 1 : -1));
                 break;
 

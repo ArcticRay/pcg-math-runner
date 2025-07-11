@@ -44,6 +44,11 @@ public class PlayerProfile
     public int GetPlayerLevel() => playerLevel;
     public int GetXP() => xp;
 
+    public Difficulty GetRank()
+    {
+        return rank;
+    }
+
     public void SetPlayerName(string name) => playerName = name;
     public void SetPlayerLevel(int level) => playerLevel = level;
     public void SetXP(int xpAmount) => xp = xpAmount;

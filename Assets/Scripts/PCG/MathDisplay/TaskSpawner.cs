@@ -15,6 +15,11 @@ public class TaskSpawner : MonoBehaviour
 
     private void Start()
     {
+
+    }
+
+    public void StartTafelSpawn(Difficulty difficulty)
+    {
         if (GameSettings.SelectedDifficultyIndex == 0)
         {
             tafelAnzahl = 10;
@@ -27,11 +32,11 @@ public class TaskSpawner : MonoBehaviour
         {
             tafelAnzahl = 20;
         }
-        SpawnTafeln();
+        SpawnTafeln(difficulty);
         SpawnFinish();
     }
 
-    private void SpawnTafeln()
+    private void SpawnTafeln(Difficulty difficulty)
     {
         if (tafelAnzahl <= 2)
         {
@@ -58,7 +63,7 @@ public class TaskSpawner : MonoBehaviour
             GameObject tafel = Instantiate(tafelPrefab, newPos, rot, transform);
             TafelDisplay display = tafel.GetComponent<TafelDisplay>();
 
-            Task task = TaskGenerator.GetNewTask();
+            Task task = TaskGenerator.GetNewTask(difficulty);
             string taskText = $"{task.getDigitOne()} {task.getOperator()} {task.getDigitTwo()} = ?";
             display.SetText(taskText);
 
