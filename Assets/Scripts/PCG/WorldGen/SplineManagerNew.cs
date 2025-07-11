@@ -16,6 +16,15 @@ public class SplineManagerNew : MonoBehaviour
 
     public int MasterPointCount;
 
+    [Header("Runtime Visualization")]
+    [SerializeField] LineRenderer centerLine, leftLine, rightLine;
+    [SerializeField] GameObject handlePrefab;
+    [SerializeField] int samplesPerCurve = 500;
+
+    [SerializeField] float elevationOffset = 2f;
+
+    private List<GameObject> handles = new List<GameObject>();
+
     [Header("Debug")]
     public bool drawDebugSplines = true;
     public List<Vector3> masterPoints = new List<Vector3>();
@@ -78,9 +87,11 @@ public class SplineManagerNew : MonoBehaviour
         rightSplineContainer.AddSpline(rightSpline);
 
         // centerSplineContainer.a
+        UpdateLines();
+        SpawnHandles(centerSplineContainer);
     }
 
-     public void GenerateParallelSplines()
+    public void GenerateParallelSplines()
     {
         leftPoints.Clear();
         rightPoints.Clear();
@@ -212,5 +223,40 @@ public class SplineManagerNew : MonoBehaviour
         if (pts.Count > 0)
             Gizmos.DrawSphere(pts[pts.Count - 1], 0.2f);
     }
+
+    public void UpdateLines()
+    {
+        DrawSpline(centerSplineContainer, centerLine);
+        DrawSpline(leftSplineContainer, leftLine);
+        DrawSpline(rightSplineContainer, rightLine);
+    }
+
+    void DrawSpline(SplineContainer c, LineRenderer lr)
+    {
+        if (c == null || lr == null) return;
+        lr.positionCount = samplesPerCurve + 1;
+        for (int i = 0; i <= samplesPerCurve; i++)
+        {
+            float t = i / (float)samplesPerCurve;
+            Vector3 worldPos = c.transform.TransformPoint(c.Spline.EvaluatePosition(t)) + Vector3.up * elevationOffset;
+            lr.SetPosition(i, worldPos);
+        }
+    }
+
+    public void SpawnHandles(SplineContainer c)
+    {
+        foreach (var h in handles) Destroy(h);
+        handles.Clear();
+
+        for (int i = 0; i < c.Spline.Count; i++)
+        {
+            Vector3 worldPos = c.transform.TransformPoint(c.Spline[i].Position);
+            var h = Instantiate(handlePrefab, worldPos, Quaternion.identity, transform);
+            h.GetComponent<SplineHandle>().Init(c, i, this);
+            handles.Add(h);
+        }
+    }
+
+
 
 }
