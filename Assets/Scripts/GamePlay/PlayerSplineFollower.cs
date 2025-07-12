@@ -27,33 +27,39 @@ public class PlayerSplineFollower : MonoBehaviour
     // progress on lane
     private float progress = 0f;
 
+    public float jumpForce = 12f;
+    public float gravity = 10f;
+    private float verticalVelocity = 0f;
+    private float yOffset = 0f;
+
+
     public Animator anim;
     public Rigidbody rb;
 
     void Update()
     {
-        if (switchTimer > 0f)
-            switchTimer -= Time.deltaTime;
+        // if (switchTimer > 0f)
+        // switchTimer -= Time.deltaTime;
 
         float speed = baseSpeed;
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
-            anim.SetBool("IsRunning", true);
+            // anim.SetBool("IsRunning", true);
             speed *= sprintMultiplier;
         }
         else
         {
-            anim.SetBool("IsRunning", false);
+            // anim.SetBool("IsRunning", false);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            anim.SetBool("IsJogging", true);
+            // anim.SetBool("IsJogging", true);
             progress += speed * Time.deltaTime;
         }
         else
         {
-            anim.SetBool("IsJogging", false);
+            // anim.SetBool("IsJogging", false);
         }
 
         if (switchTimer <= 0f)
@@ -63,8 +69,8 @@ public class PlayerSplineFollower : MonoBehaviour
                 if (targetLane > -1)
                 {
                     targetLane--;
-                    anim.SetTrigger("Left");
-                    switchTimer = laneSwitchCooldown;
+                    // anim.SetTrigger("Left");
+                    // switchTimer = laneSwitchCooldown;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.D))
@@ -72,11 +78,13 @@ public class PlayerSplineFollower : MonoBehaviour
                 if (targetLane < 1)
                 {
                     targetLane++;
-                    anim.SetTrigger("Right");
-                    switchTimer = laneSwitchCooldown;
+                    // anim.SetTrigger("Right");
+                    // switchTimer = laneSwitchCooldown;
                 }
             }
         }
+
+        HandleJump();
 
         // calculate spline position
         int numSegments = centerSplineContainer.Spline.Count - 1;
@@ -93,8 +101,12 @@ public class PlayerSplineFollower : MonoBehaviour
         float desiredOffset = targetLane * laneOffset;
         currentLateralOffset = Mathf.Lerp(currentLateralOffset, desiredOffset, laneSwitchSpeed * Time.deltaTime);
 
-        Vector3 finalPos = pos + rightVec * currentLateralOffset;
-        finalPos.y = pos.y;
+        // Vector3 finalPos = pos + rightVec * currentLateralOffset;
+        // finalPos.y = pos.y;
+        // transform.position = finalPos;
+
+        Vector3 finalPos = pos + rightVec * currentLateralOffset + Vector3.up * yOffset;
+        finalPos.y = pos.y + yOffset;  // sicherstellen, dass Y korrekt ist
         transform.position = finalPos;
 
         // set forward direction
@@ -102,4 +114,26 @@ public class PlayerSplineFollower : MonoBehaviour
         if (horizontalTangent.sqrMagnitude > 0.001f)
             transform.forward = horizontalTangent;
     }
+
+    private void HandleJump()
+    {
+        // Sprung auslösen
+        if (Input.GetKeyDown(KeyCode.Space) && yOffset < 0.001f)
+        {
+            verticalVelocity = jumpForce;
+            anim.SetTrigger("Jump");
+        }
+
+        // Gravitation anwenden
+        verticalVelocity -= gravity * Time.deltaTime;
+        yOffset += verticalVelocity * Time.deltaTime;
+
+        // Bodenkollision
+        if (yOffset < 0f)
+        {
+            yOffset = 0f;
+            verticalVelocity = 0f;
+        }
+    }
+
 }
