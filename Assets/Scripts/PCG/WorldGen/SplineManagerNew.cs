@@ -14,6 +14,12 @@ public class SplineManagerNew : MonoBehaviour
     public SplineContainer leftSplineContainer;
     public SplineContainer rightSplineContainer;
 
+    private SplineContainer[] splineContainers;
+
+    [SerializeField] private Vector3 obstacleScale = new Vector3(10f, 10f, 10f);
+    public GameObject obstaclePrefab;
+    private int obstaclesOnFail = 10;
+
     public int MasterPointCount;
 
     [Header("Runtime Visualization")]
@@ -40,6 +46,12 @@ public class SplineManagerNew : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        splineContainers = new[]
+        {
+            centerSplineContainer,
+            leftSplineContainer,
+            rightSplineContainer
+        };
     }
 
     private void Start()
@@ -254,6 +266,27 @@ public class SplineManagerNew : MonoBehaviour
             var h = Instantiate(handlePrefab, worldPos, Quaternion.identity, transform);
             h.GetComponent<SplineHandle>().Init(c, i, this);
             handles.Add(h);
+        }
+    }
+
+    public void SpawnObstacles(float tStart, float tEnd)
+    {
+
+        var chosenContainer = splineContainers[
+                UnityEngine.Random.Range(0, splineContainers.Length)
+            ];
+        var spline = chosenContainer.Spline;
+        for (int i = 0; i < obstaclesOnFail; i++)
+        {
+            float t = UnityEngine.Random.Range(tStart, tEnd);
+            float3 pos3 = spline.EvaluatePosition(t);
+            float3 forward = spline.EvaluateTangent(t);
+            float3 up = spline.EvaluateUpVector(t);
+            Quaternion rot = Quaternion.LookRotation(forward, up);
+
+            GameObject obstacle = Instantiate(obstaclePrefab, (Vector3)pos3, rot, transform);
+            obstacle.transform.localScale = obstacleScale;
+            Debug.Log("Obstacles Erstellt");
         }
     }
 

@@ -2039,6 +2039,8 @@ MonoBehaviour:
   centerSplineContainer: {fileID: 294402095}
   leftSplineContainer: {fileID: 1845191557}
   rightSplineContainer: {fileID: 937673399}
+  obstacleScale: {x: 10, y: 10, z: 10}
+  obstaclePrefab: {fileID: 1280775136720273797, guid: c248f2c54a744cdb8ced79a33acddf12, type: 3}
   MasterPointCount: 0
   centerLine: {fileID: 1617712438}
   leftLine: {fileID: 1897725594}
@@ -2887,8 +2889,8 @@ MonoBehaviour:
   laneSwitchSpeed: 4
   laneOffset: 20
   laneSwitchCooldown: 0.75
-  jumpForce: 25
-  gravity: 28
+  jumpForce: 30
+  gravity: 32
   anim: {fileID: 2088039026}
   rb: {fileID: 476394473}
 --- !u!4 &1700665686
@@ -3852,15 +3854,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5017668389821867324, guid: 7a22a665b570d4e49b0945961eede19e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0.064
       objectReference: {fileID: 0}
     - target: {fileID: 5017668389821867324, guid: 7a22a665b570d4e49b0945961eede19e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -0.154
       objectReference: {fileID: 0}
     - target: {fileID: 5017668389821867324, guid: 7a22a665b570d4e49b0945961eede19e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.018
+      value: -0.009
       objectReference: {fileID: 0}
     - target: {fileID: 5017668389821867324, guid: 7a22a665b570d4e49b0945961eede19e, type: 3}
       propertyPath: m_LocalRotation.w

@@ -15,6 +15,9 @@ public class AnswerTrigger : MonoBehaviour
 
     private GameUI gameUI;
 
+    public SplineManagerNew splineManagerNew;
+    public float tPosition = 0;
+
     void Awake()
     {
         gameUI = FindFirstObjectByType<GameUI>();
@@ -22,6 +25,7 @@ public class AnswerTrigger : MonoBehaviour
 
     void Start()
     {
+        splineManagerNew = (SplineManagerNew)FindFirstObjectByType(typeof(SplineManagerNew));
         gameManager = (GameManager)FindFirstObjectByType(typeof(GameManager));
         if (audioSource == null)
         {
@@ -50,9 +54,17 @@ public class AnswerTrigger : MonoBehaviour
         else
         {
             Debug.Log("Spieler hat falsch geantwortet");
+            splineManagerNew.SpawnObstacles(tPosition, 1f);
             // Play wrong sound
             if (wrongClip != null && audioSource != null)
                 audioSource.PlayOneShot(wrongClip);
         }
     }
+
+    public void SetTPosition(float t)
+    {
+        tPosition = t;
+    }
+
+
 }

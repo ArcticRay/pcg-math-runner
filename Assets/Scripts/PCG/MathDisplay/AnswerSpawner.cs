@@ -32,6 +32,8 @@ public class AnswerSpawner : MonoBehaviour
 
 
             var display = answerTafel.GetComponent<TafelDisplay>();
+            var trigger = answerTafel.GetComponent<AnswerTrigger>();
+            trigger.SetTPosition(t);
             if (display != null)
             {
                 if (i == randomizer)
