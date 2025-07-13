@@ -54,7 +54,7 @@ public class AnswerTrigger : MonoBehaviour
         else
         {
             Debug.Log("Spieler hat falsch geantwortet");
-            splineManagerNew.SpawnObstacles(tPosition, 1f);
+            splineManagerNew.SpawnObstacles(tPosition, tPosition + 0.1f);
             // Play wrong sound
             if (wrongClip != null && audioSource != null)
                 audioSource.PlayOneShot(wrongClip);

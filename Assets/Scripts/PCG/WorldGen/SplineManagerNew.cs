@@ -16,9 +16,12 @@ public class SplineManagerNew : MonoBehaviour
 
     private SplineContainer[] splineContainers;
 
+
+    [SerializeField] private float spawnHeight = 100f;
     [SerializeField] private Vector3 obstacleScale = new Vector3(10f, 10f, 10f);
-    public GameObject obstaclePrefab;
-    private int obstaclesOnFail = 10;
+    public GameObject[] dynamicObstaclePrefabs;
+    public GameObject[] obstaclePrefabs;
+    private int obstaclesOnFail = 5;
 
     public int MasterPointCount;
 
@@ -272,21 +275,35 @@ public class SplineManagerNew : MonoBehaviour
     public void SpawnObstacles(float tStart, float tEnd)
     {
 
-        var chosenContainer = splineContainers[
-                UnityEngine.Random.Range(0, splineContainers.Length)
-            ];
-        var spline = chosenContainer.Spline;
+
         for (int i = 0; i < obstaclesOnFail; i++)
         {
+            var chosenContainer = splineContainers[
+                UnityEngine.Random.Range(0, splineContainers.Length)
+            ];
+            var spline = chosenContainer.Spline;
+
             float t = UnityEngine.Random.Range(tStart, tEnd);
             float3 pos3 = spline.EvaluatePosition(t);
             float3 forward = spline.EvaluateTangent(t);
             float3 up = spline.EvaluateUpVector(t);
             Quaternion rot = Quaternion.LookRotation(forward, up);
 
-            GameObject obstacle = Instantiate(obstaclePrefab, (Vector3)pos3, rot, transform);
-            obstacle.transform.localScale = obstacleScale;
-            Debug.Log("Obstacles Erstellt");
+            Vector3 spawnPos = (Vector3)pos3;
+            if (i % 2 == 0)
+            {
+                spawnPos = spawnPos + Vector3.up * spawnHeight;
+                GameObject obstacle = Instantiate(dynamicObstaclePrefabs[0], spawnPos, rot, transform);
+                obstacle.transform.localScale = obstacleScale;
+                Debug.Log("Obstacles Erstellt");
+            }
+            else
+            {
+                GameObject obstacle = Instantiate(obstaclePrefabs[0], spawnPos, rot, transform);
+                obstacle.transform.localScale = obstacleScale;
+                Debug.Log("Obstacles Erstellt");
+            }
+
         }
     }
 

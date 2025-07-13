@@ -2039,8 +2039,12 @@ MonoBehaviour:
   centerSplineContainer: {fileID: 294402095}
   leftSplineContainer: {fileID: 1845191557}
   rightSplineContainer: {fileID: 937673399}
+  spawnHeight: 100
   obstacleScale: {x: 10, y: 10, z: 10}
-  obstaclePrefab: {fileID: 1280775136720273797, guid: c248f2c54a744cdb8ced79a33acddf12, type: 3}
+  dynamicObstaclePrefabs:
+  - {fileID: 1280775136720273797, guid: c248f2c54a744cdb8ced79a33acddf12, type: 3}
+  obstaclePrefabs:
+  - {fileID: 8888003951610112524, guid: d85b0b99ba2541fc8d1d67b661fcae64, type: 3}
   MasterPointCount: 0
   centerLine: {fileID: 1617712438}
   leftLine: {fileID: 1897725594}
