@@ -53,7 +53,7 @@ public class SettingsMenuController : MonoBehaviour
     public void OnStartGame()
     {
         GameSettings.SelectedDifficultyIndex = difficultyDropdown.value;
-        SceneManager.LoadScene("IslandScene");
+        SceneManager.LoadScene("3IslandScene");
     }
 
     public void OnEndGame()

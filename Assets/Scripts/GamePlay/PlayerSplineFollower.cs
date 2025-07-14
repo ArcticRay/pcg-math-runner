@@ -27,8 +27,8 @@ public class PlayerSplineFollower : MonoBehaviour
     // progress on lane
     private float progress = 0f;
 
-    public float jumpForce = 12f;
-    public float gravity = 10f;
+    public float jumpForce = 30f;
+    public float gravity = 32f;
     private float verticalVelocity = 0f;
     private float yOffset = 0f;
 

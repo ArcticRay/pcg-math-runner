@@ -274,8 +274,6 @@ public class SplineManagerNew : MonoBehaviour
 
     public void SpawnObstacles(float tStart, float tEnd)
     {
-
-
         for (int i = 0; i < obstaclesOnFail; i++)
         {
             var chosenContainer = splineContainers[
@@ -306,7 +304,4 @@ public class SplineManagerNew : MonoBehaviour
 
         }
     }
-
-
-
 }
