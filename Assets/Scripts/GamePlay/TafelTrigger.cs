@@ -21,7 +21,7 @@ public class TafelTrigger : MonoBehaviour
         if (this.CompareTag("Finish"))
         {
             Debug.Log("Spieler hat das Ziel erreicht");
-            pauseManager.ToMainMenu();
+            pauseManager.ToScoreboard();
             // SceneManager.LoadScene("MainMenu");
         }
         if (other.CompareTag("Player"))
