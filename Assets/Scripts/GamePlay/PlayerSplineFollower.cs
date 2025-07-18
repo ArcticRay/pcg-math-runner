@@ -14,6 +14,8 @@ public class PlayerSplineFollower : MonoBehaviour
     public float sprintMultiplier = 1.5f;
     public float laneSwitchSpeed = 5f;
 
+    private bool isSwitchingLane = false;
+
     [Header("Lane Settings")]
     public float laneOffset = 20f;
     // Lane-Indices: -1 = links, 0 = center, 1 = rechts
@@ -28,9 +30,11 @@ public class PlayerSplineFollower : MonoBehaviour
     private float progress = 0f;
 
     public float jumpForce = 30f;
-    public float gravity = 32f;
+    public float gravity = 50f;
     private float verticalVelocity = 0f;
     private float yOffset = 0f;
+
+    private bool isInAir = false;
 
 
     public Animator anim;
@@ -65,24 +69,34 @@ public class PlayerSplineFollower : MonoBehaviour
 
         if (switchTimer <= 0f)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) && targetLane > -1)
             {
-                if (targetLane > -1)
+                targetLane--;
+                if (!anim.GetBool("isJumping"))
                 {
-                    targetLane--;
                     anim.SetTrigger("Left");
-                    // switchTimer = laneSwitchCooldown;
                 }
+                isSwitchingLane = true;
+                switchTimer = laneSwitchCooldown;
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D) && targetLane < 1)
             {
-                if (targetLane < 1)
+                targetLane++;
+                if (!anim.GetBool("isJumping"))
                 {
                     anim.SetTrigger("Right");
-
-                    targetLane++;
-                    // switchTimer = laneSwitchCooldown;
                 }
+                isSwitchingLane = true;
+                switchTimer = laneSwitchCooldown;
+            }
+        }
+        else
+        {
+            switchTimer -= Time.deltaTime;
+
+            if (switchTimer <= 0f)
+            {
+                isSwitchingLane = false;
             }
         }
 
@@ -120,10 +134,11 @@ public class PlayerSplineFollower : MonoBehaviour
     private void HandleJump()
     {
         // Sprung auslösen
-        if (Input.GetKeyDown(KeyCode.Space) && yOffset < 0.001f)
+        if (Input.GetKeyDown(KeyCode.Space) && !isInAir && !isSwitchingLane)
         {
             verticalVelocity = jumpForce;
-            anim.SetTrigger("Jump");
+            isInAir = true;
+            anim.SetBool("isJumping", true);
         }
 
         // Gravitation anwenden
@@ -135,7 +150,14 @@ public class PlayerSplineFollower : MonoBehaviour
         {
             yOffset = 0f;
             verticalVelocity = 0f;
+
+            if (isInAir)
+            {
+                isInAir = false;
+                anim.SetBool("isJumping", false);
+            }
         }
     }
+
 
 }

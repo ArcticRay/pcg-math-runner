@@ -2532,7 +2532,7 @@ MonoBehaviour:
   laneOffset: 20
   laneSwitchCooldown: 0.75
   jumpForce: 30
-  gravity: 32
+  gravity: 50
   anim: {fileID: 812804027}
   rb: {fileID: 812804026}
 --- !u!4 &1700665686
