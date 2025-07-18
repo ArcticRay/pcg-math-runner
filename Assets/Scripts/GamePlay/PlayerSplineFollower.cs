@@ -55,11 +55,12 @@ public class PlayerSplineFollower : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             // anim.SetBool("IsJogging", true);
+            anim.SetBool("Walking", true);
             progress += speed * Time.deltaTime;
         }
         else
         {
-            // anim.SetBool("IsJogging", false);
+            anim.SetBool("Walking", false);
         }
 
         if (switchTimer <= 0f)
@@ -69,7 +70,7 @@ public class PlayerSplineFollower : MonoBehaviour
                 if (targetLane > -1)
                 {
                     targetLane--;
-                    // anim.SetTrigger("Left");
+                    anim.SetTrigger("Left");
                     // switchTimer = laneSwitchCooldown;
                 }
             }
@@ -77,8 +78,9 @@ public class PlayerSplineFollower : MonoBehaviour
             {
                 if (targetLane < 1)
                 {
+                    anim.SetTrigger("Right");
+
                     targetLane++;
-                    // anim.SetTrigger("Right");
                     // switchTimer = laneSwitchCooldown;
                 }
             }
