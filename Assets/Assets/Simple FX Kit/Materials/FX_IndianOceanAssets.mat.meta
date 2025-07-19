@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e88ae70fdb7a9234bb51f64e1f7d21d0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 244171
+  packageName: 'Simple Particles FX : Toon Effects'
+  packageVersion: 1.0.1
+  assetPath: Assets/Simple FX Kit/Materials/FX_IndianOceanAssets.mat
+  uploadId: 623505

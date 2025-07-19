@@ -57,4 +57,9 @@ public class PauseManager : MonoBehaviour
 
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void ToScoreboard()
+    {
+        SceneManager.LoadScene("Scoreboard");
+    }
 }
