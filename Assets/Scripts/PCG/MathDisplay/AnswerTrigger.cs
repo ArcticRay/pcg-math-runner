@@ -1,3 +1,4 @@
+using System.Net;
 using UnityEngine;
 
 public class AnswerTrigger : MonoBehaviour
@@ -14,6 +15,10 @@ public class AnswerTrigger : MonoBehaviour
     public AudioClip wrongClip;
 
     private GameUI gameUI;
+
+    public GameObject correctFracturedPrefab;
+    public GameObject falseFracturedPrefab;
+
 
     public SplineManagerNew splineManagerNew;
     public float tPosition = 0;
@@ -59,12 +64,49 @@ public class AnswerTrigger : MonoBehaviour
             if (wrongClip != null && audioSource != null)
                 audioSource.PlayOneShot(wrongClip);
         }
+        BreakApart(isCorrect);
+
     }
 
     public void SetTPosition(float t)
     {
         tPosition = t;
     }
+
+    public void BreakApart(bool correct)
+    {
+        GameObject fracturedInstance;
+        if (correct)
+        {
+            fracturedInstance = Instantiate(correctFracturedPrefab, transform.position, transform.rotation);
+        }
+        else
+        {
+            fracturedInstance = Instantiate(falseFracturedPrefab, transform.position, transform.rotation);
+        }
+
+        // Renderer und Collider deaktivieren
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
+            renderer.enabled = false;
+
+        foreach (var collider in GetComponentsInChildren<Collider>())
+            collider.enabled = false;
+
+        // Audio abspielen (wenn vorhanden)
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio != null)
+        {
+            audio.Play();
+            Destroy(gameObject, audio.clip.length); // nach Sound zerstören
+        }
+        else
+        {
+            Destroy(gameObject, 2f); // Fallback, falls kein Audio vorhanden
+        }
+
+        Destroy(fracturedInstance, 3f);
+    }
+
 
 
 }

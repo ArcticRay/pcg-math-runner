@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.IO;
 
 public class SettingsMenuController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class SettingsMenuController : MonoBehaviour
     public TMP_InputField playerNameInput;
     public TMP_Dropdown mapDropdown;
     public TMP_Dropdown difficultyDropdown;
+
+    private string sceneIfExists = "3IslandScene";
+    private string sceneIfNotExists = "Tutorial";
 
     void Start()
     {
@@ -53,7 +57,16 @@ public class SettingsMenuController : MonoBehaviour
     public void OnStartGame()
     {
         GameSettings.SelectedDifficultyIndex = difficultyDropdown.value;
-        SceneManager.LoadScene("3IslandScene");
+        string filePath = Path.Combine(Application.streamingAssetsPath, playerNameInput.text + ".json");
+
+        if (File.Exists(filePath))
+        {
+            SceneManager.LoadScene(sceneIfExists);
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneIfNotExists);
+        }
     }
 
     public void OnEndGame()
