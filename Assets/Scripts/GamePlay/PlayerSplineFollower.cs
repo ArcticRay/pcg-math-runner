@@ -14,6 +14,8 @@ public class PlayerSplineFollower : MonoBehaviour
     public float sprintMultiplier = 1.5f;
     public float laneSwitchSpeed = 5f;
 
+    private bool isBlocked = false;
+
     private bool isSwitchingLane = false;
 
     [Header("Lane Settings")]
@@ -56,7 +58,7 @@ public class PlayerSplineFollower : MonoBehaviour
             // anim.SetBool("IsRunning", false);
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && !isBlocked)
         {
             // anim.SetBool("IsJogging", true);
             anim.SetBool("Walking", true);
@@ -156,6 +158,24 @@ public class PlayerSplineFollower : MonoBehaviour
                 isInAir = false;
                 anim.SetBool("isJumping", false);
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            Debug.Log("Collision");
+            isBlocked = true;
+            anim.SetBool("Walking", false);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            isBlocked = false;
         }
     }
 

@@ -66,7 +66,7 @@ Material:
     m_Floats:
     - _AlphaCutoff: 0.5
     - _Coverage: 0.75
-    - _DistortionPower: 0.006
+    - _DistortionPower: 0.007
     - _Float0: 0.01
     - _Noise01Power: 1
     - _Noise02Power: 1
@@ -74,7 +74,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ScatteringPower: 3.3
-    - _Softness: 0.984
+    - _Softness: 1
     - _Tiling01: 0.5
     - _Tiling02: 1
     - _UseFog: 1
