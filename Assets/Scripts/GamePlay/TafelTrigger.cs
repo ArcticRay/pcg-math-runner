@@ -11,16 +11,20 @@ public class TafelTrigger : MonoBehaviour
 
     private GameUI gameUI;
 
+    private TimerDisplay timerDisplay;
+
     void Awake()
     {
         gameUI = FindFirstObjectByType<GameUI>();
         pauseManager = FindFirstObjectByType<PauseManager>();
+        timerDisplay = FindFirstObjectByType<TimerDisplay>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (this.CompareTag("Finish"))
         {
             Debug.Log("Spieler hat das Ziel erreicht");
+            timerDisplay.StopTimer();
             pauseManager.ToScoreboard();
             // SceneManager.LoadScene("MainMenu");
         }
