@@ -57,7 +57,8 @@ public class SettingsMenuController : MonoBehaviour
     public void OnStartGame()
     {
         GameSettings.SelectedDifficultyIndex = difficultyDropdown.value;
-        string filePath = Path.Combine(Application.streamingAssetsPath, playerNameInput.text + ".json");
+        string fileName = playerNameInput.text + ".json";
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
 
         if (File.Exists(filePath))
         {

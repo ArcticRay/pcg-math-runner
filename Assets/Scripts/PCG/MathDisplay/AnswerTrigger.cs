@@ -85,26 +85,25 @@ public class AnswerTrigger : MonoBehaviour
             fracturedInstance = Instantiate(falseFracturedPrefab, transform.position, transform.rotation);
         }
 
-        // Renderer und Collider deaktivieren
         foreach (var renderer in GetComponentsInChildren<Renderer>())
             renderer.enabled = false;
 
         foreach (var collider in GetComponentsInChildren<Collider>())
             collider.enabled = false;
 
-        // Audio abspielen (wenn vorhanden)
         AudioSource audio = GetComponent<AudioSource>();
         if (audio != null)
         {
             audio.Play();
-            Destroy(gameObject, audio.clip.length); // nach Sound zerstören
+            // Destroy(gameObject, audio.clip.length); // nach Sound zerstören
         }
         else
         {
-            Destroy(gameObject, 2f); // Fallback, falls kein Audio vorhanden
+            // Destroy(gameObject, 2f); // Fallback, falls kein Audio vorhanden
         }
 
-        Destroy(fracturedInstance, 3f);
+        // Destroy(fracturedInstance, 3f);
+        // Ersetzt durch Partikelsystem
     }
 
 
