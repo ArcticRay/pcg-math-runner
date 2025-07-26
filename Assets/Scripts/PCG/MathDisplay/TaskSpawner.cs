@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
-using TMPro;
 
 public class TaskSpawner : MonoBehaviour
 {
@@ -11,12 +10,6 @@ public class TaskSpawner : MonoBehaviour
     [SerializeField] private int tafelAnzahl = 20;
     [SerializeField] private AnswerSpawner answerSpawner;
 
-
-
-    private void Start()
-    {
-
-    }
 
     public void StartTafelSpawn(Difficulty difficulty)
     {
