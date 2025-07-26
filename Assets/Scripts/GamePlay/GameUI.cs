@@ -2,7 +2,6 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class GameUI : MonoBehaviour
 {

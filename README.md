@@ -2,11 +2,42 @@
 
 # PCG Math Runner
 
-A procedurally generated island-based environment and adaptive math‐learning game in one. Create your player profile, explore ever-changing islands, and sharpen your math skills with dynamically tailored challenges.
+**A procedurally generated exergame designed to help elementary school children practice basic math operations.**  
+Navigate through ever-changing island worlds using the Wii Balance Board or keyboard input, and solve math tasks that adapt to your skill level.
 
 ---
 
 ![Island View](Assets/Images/island.jpeg)
+
+---
+
+## 🎮 Gameplay
+
+- Control a character running through a dynamically generated island.
+- Each level is **procedurally generated** – no two runs are the same.
+- During the run, **math problems** (addition, subtraction, multiplication, division) appear.
+- Solve them correctly to earn points and keep the game easy.
+- Wrong answers? → The game gets **harder**: more obstacles, narrower paths, faster pacing.
+
+---
+
+## 🧠 Learning Goals
+
+- Promote **basic math skills** through motivating gameplay.
+- **Adaptive difficulty**: math tasks scale with the player's performance.
+- Encourage **physical activity** with support for the Wii Balance Board (optional).
+
+---
+
+## 🧰 Technical Overview
+
+| Component             | Description                                                                    |
+| --------------------- | ------------------------------------------------------------------------------ |
+| 🎮 Input              | Wii Balance Board (via Bluetooth) or fallback to keyboard                      |
+| 🧱 Terrain Generation | Spline-based paths, procedural islands using noise-based terrain               |
+| 🧩 Task System        | Procedural math task generation with adaptive difficulty                       |
+| 🧠 Player Model       | Skill tracking to dynamically adapt challenges and environments                |
+| 🚧 Obstacle Logic     | Incorrect answers trigger runtime difficulty increase via additional obstacles |
 
 ---
 
@@ -32,8 +63,8 @@ A procedurally generated island-based environment and adaptive math‐learning g
 
 ## 📸 Screenshots
 
-| **Raw Perlin‐Noise Heightmap** | **Color‐Mapped Terrain** |
-|:------------------------------:|:------------------------:|
+|    **Raw Perlin‐Noise Heightmap**     |         **Color‐Mapped Terrain**         |
+| :-----------------------------------: | :--------------------------------------: |
 | ![Heightmap](Assets/Images/Noise.png) | ![Color Map](Assets/Images/Colormap.png) |
 
 3. **Chunked LOD Around Player in Shaded Wireframe Mode**  
