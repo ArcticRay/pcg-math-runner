@@ -527,6 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 342533975}
+  - component: {fileID: 342533976}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -555,6 +556,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &342533976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342533974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3308a41b3a6428f9286c1c3bf841d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmButton: {fileID: 350240713}
+  cancelButton: {fileID: 1257138074}
 --- !u!1 &342997701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131488969}
   - component: {fileID: 1131488968}
+  - component: {fileID: 1131488970}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -2040,6 +2056,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1131488970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131488967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c079ce86c59df4acaa395535f83fddaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputField: {fileID: 1148331805}
 --- !u!1 &1134490818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,6 +3028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1339143587}
+  - component: {fileID: 1339143588}
   m_Layer: 5
   m_Name: NamePanel
   m_TagString: Untagged
@@ -3027,6 +3057,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1339143588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339143586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3308a41b3a6428f9286c1c3bf841d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmButton: {fileID: 1656604220}
+  cancelButton: {fileID: 0}
 --- !u!1 &1341688341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3351,6 +3395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554917585}
+  - component: {fileID: 1554917586}
   m_Layer: 5
   m_Name: DifficultyPanel
   m_TagString: Untagged
@@ -3379,6 +3424,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1554917586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554917584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3308a41b3a6428f9286c1c3bf841d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmButton: {fileID: 1742329488}
+  cancelButton: {fileID: 0}
 --- !u!1 &1582536149
 GameObject:
   m_ObjectHideFlags: 0
@@ -5179,6 +5238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2035811885}
+  - component: {fileID: 2035811886}
   m_Layer: 5
   m_Name: ModePanel
   m_TagString: Untagged
@@ -5207,6 +5267,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2035811886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035811884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3308a41b3a6428f9286c1c3bf841d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmButton: {fileID: 1315918016}
+  cancelButton: {fileID: 0}
 --- !u!1 &2087795876
 GameObject:
   m_ObjectHideFlags: 0
