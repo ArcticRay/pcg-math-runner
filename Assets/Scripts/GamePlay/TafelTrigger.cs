@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 public class TafelTrigger : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public class TafelTrigger : MonoBehaviour
 
     private GameUI gameUI;
 
+    private GameManager gameManager;
+
     private TimerDisplay timerDisplay;
 
     void Awake()
@@ -18,17 +19,19 @@ public class TafelTrigger : MonoBehaviour
         gameUI = FindFirstObjectByType<GameUI>();
         pauseManager = FindFirstObjectByType<PauseManager>();
         timerDisplay = FindFirstObjectByType<TimerDisplay>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (this.CompareTag("Finish"))
         {
             Debug.Log("Spieler hat das Ziel erreicht");
+            gameManager.EndRun();
             timerDisplay.StopTimer();
             pauseManager.ToScoreboard();
             // SceneManager.LoadScene("MainMenu");
         }
-        if (other.CompareTag("Player"))
+        else if (other.CompareTag("Player"))
         {
             gameUI.ShowPopup(TaskText.text);
             Debug.Log("Spieler hat die Tafel durchquert!");
