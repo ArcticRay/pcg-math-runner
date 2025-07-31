@@ -68,6 +68,7 @@ public class SettingsMenuController : MonoBehaviour
         {
             SceneManager.LoadScene(sceneIfNotExists);
         }
+        Cursor.visible = false;
     }
 
     public void OnEndGame()
