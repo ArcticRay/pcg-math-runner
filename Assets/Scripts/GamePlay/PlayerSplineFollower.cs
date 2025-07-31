@@ -18,6 +18,20 @@ public class PlayerSplineFollower : MonoBehaviour
 
     private bool isSwitchingLane = false;
 
+    [Header("Jump Audio")]
+    public AudioSource landingSource;
+    public AudioClip landingClip;
+
+    private bool wasInAir = false;
+
+    [Header("Footstep Audio")]
+    public AudioSource footstepSource;
+    public AudioClip[] footstepClips;
+    public float stepDistance = 15f;
+
+    private float distanceAccumulator = 0f;
+    private Vector3 lastPosition;
+
     [Header("Lane Settings")]
     public float laneOffset = 20f;
     // Lane-Indices: -1 = links, 0 = center, 1 = rechts
@@ -41,6 +55,11 @@ public class PlayerSplineFollower : MonoBehaviour
 
     public Animator anim;
     public Rigidbody rb;
+
+    void Start()
+    {
+        lastPosition = transform.position;
+    }
 
     void Update()
     {
@@ -102,6 +121,19 @@ public class PlayerSplineFollower : MonoBehaviour
             }
         }
 
+        // Footstep Sounds
+        if (anim.GetBool("Walking") && !isInAir && !isBlocked)
+        {
+            float delta = Vector3.Distance(transform.position, lastPosition);
+            distanceAccumulator += delta;
+            if (distanceAccumulator >= stepDistance)
+            {
+                PlayFootstep();
+                distanceAccumulator = 0f;
+            }
+        }
+        lastPosition = transform.position;
+
         HandleJump();
 
         // calculate spline position
@@ -135,7 +167,9 @@ public class PlayerSplineFollower : MonoBehaviour
 
     private void HandleJump()
     {
-        // Sprung auslösen
+
+        bool prevInAir = isInAir;
+
         if (Input.GetKeyDown(KeyCode.Space) && !isInAir && !isSwitchingLane)
         {
             verticalVelocity = jumpForce;
@@ -143,7 +177,6 @@ public class PlayerSplineFollower : MonoBehaviour
             anim.SetBool("isJumping", true);
         }
 
-        // Gravitation anwenden
         verticalVelocity -= gravity * Time.deltaTime;
         yOffset += verticalVelocity * Time.deltaTime;
 
@@ -157,8 +190,27 @@ public class PlayerSplineFollower : MonoBehaviour
             {
                 isInAir = false;
                 anim.SetBool("isJumping", false);
+
+                if (prevInAir)
+                    PlayLanding();
             }
         }
+    }
+
+    private void PlayFootstep()
+    {
+        if (footstepClips.Length == 0 || footstepSource == null)
+            return;
+        int idx = UnityEngine.Random.Range(0, footstepClips.Length);
+        footstepSource.PlayOneShot(footstepClips[idx]);
+    }
+
+    private void PlayLanding()
+    {
+        if (landingClip == null || landingSource == null)
+            return;
+
+        landingSource.PlayOneShot(landingClip);
     }
 
     void OnTriggerEnter(Collider other)
