@@ -13,5 +13,6 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("Start Game");
         SceneManager.LoadScene("3IslandScene");
+        Cursor.visible = false;
     }
 }

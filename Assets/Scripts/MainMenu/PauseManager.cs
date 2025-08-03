@@ -61,5 +61,7 @@ public class PauseManager : MonoBehaviour
     public void ToScoreboard()
     {
         SceneManager.LoadScene("Scoreboard");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

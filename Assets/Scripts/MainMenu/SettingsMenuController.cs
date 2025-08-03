@@ -63,12 +63,14 @@ public class SettingsMenuController : MonoBehaviour
         if (File.Exists(filePath))
         {
             SceneManager.LoadScene(sceneIfExists);
+            Cursor.visible = false;
         }
         else
         {
             SceneManager.LoadScene(sceneIfNotExists);
+            Cursor.visible = true;
         }
-        Cursor.visible = false;
+
     }
 
     public void OnEndGame()

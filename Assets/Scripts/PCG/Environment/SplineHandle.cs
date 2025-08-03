@@ -27,8 +27,8 @@ public class SplineHandle : MonoBehaviour
             container.Spline[knotIndex] = knot;
 
             // Visuals aktualisieren
-            manager.UpdateLines();
-            manager.SpawnHandles(container);
+            // manager.UpdateLines();
+            // manager.SpawnHandles(container);
         }
     }
 }

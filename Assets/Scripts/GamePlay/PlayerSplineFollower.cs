@@ -22,8 +22,6 @@ public class PlayerSplineFollower : MonoBehaviour
     public AudioSource landingSource;
     public AudioClip landingClip;
 
-    private bool wasInAir = false;
-
     [Header("Footstep Audio")]
     public AudioSource footstepSource;
     public AudioClip[] footstepClips;
@@ -70,7 +68,7 @@ public class PlayerSplineFollower : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             // anim.SetBool("IsRunning", true);
-            speed *= sprintMultiplier;
+            // speed *= sprintMultiplier;  
         }
         else
         {
