@@ -68,7 +68,7 @@ public class PlayerSplineFollower : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             // anim.SetBool("IsRunning", true);
-            speed *= sprintMultiplier;
+            // speed *= sprintMultiplier;  
         }
         else
         {

@@ -32,7 +32,14 @@ public class SplineManagerNew : MonoBehaviour
 
     [SerializeField] float elevationOffset = 2f;
 
-    private List<GameObject> handles = new List<GameObject>();
+    // private List<GameObject> handles = new List<GameObject>();
+
+    [Header("Prefab Spawn Settings")]
+    public GameObject[] spawnPrefabs;
+
+    public int prefabsPerLane = 1000;
+    public Vector3 spawnScale = new Vector3(2, 2, 2);
+    public float spawnHeightOffset = 0.1f;
 
     [Header("Debug")]
     public bool drawDebugSplines = true;
@@ -102,8 +109,13 @@ public class SplineManagerNew : MonoBehaviour
         rightSplineContainer.AddSpline(rightSpline);
 
         // centerSplineContainer.a
-        UpdateLines();
-        SpawnHandles(centerSplineContainer);
+        // UpdateLines();
+        // SpawnHandles(centerSplineContainer);
+        ClearSpawnedPrefabs();
+
+        SpawnPrefabsAlongSpline(centerSplineContainer);
+        SpawnPrefabsAlongSpline(leftSplineContainer);
+        SpawnPrefabsAlongSpline(rightSplineContainer);
     }
 
     public void GenerateParallelSplines()
@@ -239,7 +251,7 @@ public class SplineManagerNew : MonoBehaviour
             Gizmos.DrawSphere(pts[pts.Count - 1], 0.2f);
     }
 
-    public void UpdateLines()
+    /* public void UpdateLines()
     {
         DrawSpline(centerSplineContainer, centerLine);
         DrawSpline(leftSplineContainer, leftLine);
@@ -257,8 +269,9 @@ public class SplineManagerNew : MonoBehaviour
             lr.SetPosition(i, worldPos);
         }
     }
+    */
 
-    public void SpawnHandles(SplineContainer c)
+    /*public void SpawnHandles(SplineContainer c)
     {
         foreach (var h in handles) Destroy(h);
         handles.Clear();
@@ -271,6 +284,41 @@ public class SplineManagerNew : MonoBehaviour
             handles.Add(h);
         }
     }
+    */
+
+    public void SpawnPrefabsAlongSpline(SplineContainer container)
+    {
+        if (container == null || spawnPrefabs == null || spawnPrefabs.Length == 0)
+            return;
+
+        for (int i = 0; i < prefabsPerLane; i++)
+        {
+            float t = (prefabsPerLane == 1) ? 0f : i / (float)(prefabsPerLane - 1);
+            float3 pos3 = container.Spline.EvaluatePosition(t);
+            float3 tang = container.Spline.EvaluateTangent(t);
+            float3 upVec = container.Spline.EvaluateUpVector(t);
+
+            Vector3 worldPos = container.transform.TransformPoint((Vector3)pos3)
+                                 + Vector3.up * spawnHeightOffset;
+            Quaternion rot = Quaternion.LookRotation((Vector3)tang, (Vector3)upVec);
+
+            GameObject prefab = spawnPrefabs[i % spawnPrefabs.Length];
+            GameObject go = Instantiate(prefab, worldPos, rot, transform);
+            go.name = $"Spawned_{container.name}_{prefab.name}_{i}";
+            go.transform.localScale = spawnScale;
+        }
+    }
+
+    public void ClearSpawnedPrefabs()
+    {
+        var toDestroy = new List<Transform>();
+        foreach (Transform child in transform)
+            if (child.name.StartsWith("Spawned_"))
+                toDestroy.Add(child);
+        foreach (var child in toDestroy)
+            Destroy(child.gameObject);
+    }
+
 
     public void SpawnObstacles(float tStart, float tEnd)
     {

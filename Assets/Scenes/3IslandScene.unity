@@ -1689,6 +1689,12 @@ MonoBehaviour:
   handlePrefab: {fileID: 1316276671998674219, guid: 713ea1dfe7794460a8bab1089c1db0cb, type: 3}
   samplesPerCurve: 400
   elevationOffset: 1
+  spawnPrefabs:
+  - {fileID: 5028724566790373055, guid: b2616d17fa2545dda9e12db5bbc27895, type: 3}
+  - {fileID: 4543215982039617835, guid: d8263c51c41b4b129412274da254178a, type: 3}
+  prefabsPerLane: 1000
+  spawnScale: {x: 2, y: 2, z: 2}
+  spawnHeightOffset: 0.1
   drawDebugSplines: 1
   masterPoints: []
 --- !u!1 &1200493150
@@ -3015,8 +3021,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9453442bdc5d247489e53bf6cd5482fd, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9453442bdc5d247489e53bf6cd5482fd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b9f76706372bd436ba02fda01f49d0cc, type: 3}
+  m_Resource: {fileID: 8300000, guid: b9f76706372bd436ba02fda01f49d0cc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
