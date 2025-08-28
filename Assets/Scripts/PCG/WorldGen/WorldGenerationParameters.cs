@@ -4,7 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WorldGenerationParameters", menuName = "World/Generation Parameters")]
 public class WorldGenerationParameters : ScriptableObject
 {
-    public Daytime daytime;
     public WorldType worldType;
 
     public String worldName;
@@ -31,7 +30,6 @@ public class WorldGenerationParameters : ScriptableObject
 
     public WorldGenerationParameters()
     {
-        daytime = Daytime.NOON;
         worldType = WorldType.ISLAND;
         worldName = "Neue Welt";
         walkDuration = 1800;

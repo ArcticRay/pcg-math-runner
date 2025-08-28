@@ -19,6 +19,8 @@ Navigate through ever-changing island worlds using the Wii Balance Board or keyb
 - Solve them correctly to earn points and keep the game easy.
 - Wrong answers? → The game gets **harder**: more obstacles, narrower paths, faster pacing.
 
+![Controls](Assets/Images/Controls.png)
+
 ---
 
 ## 🧠 Learning Goals
@@ -76,3 +78,6 @@ Navigate through ever-changing island worlds using the Wii Balance Board or keyb
 5. **Playable Environment Showcase**  
    ![Island View](Assets/Images/island.jpeg)  
    ![Path View](Assets/Images/path.jpeg)
+
+6. **Gameplay (Easy Mode Example)**  
+   ![Gameplay Easy](Assets/Images/Gameplay_Easy.png)
