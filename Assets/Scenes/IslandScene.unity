@@ -236,8 +236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiGroup: {fileID: 111623699}
+  popupPanel: {fileID: 0}
+  popupPanelRect: {fileID: 0}
   popupText: {fileID: 550571861}
-  popupRect: {fileID: 550571860}
   popDuration: 0.5
   moveDuration: 0.8
   padding: {x: 20, y: 10}
@@ -1685,6 +1686,10 @@ MonoBehaviour:
   centerSplineContainer: {fileID: 294402095}
   leftSplineContainer: {fileID: 1845191557}
   rightSplineContainer: {fileID: 937673399}
+  spawnHeight: 100
+  obstacleScale: {x: 10, y: 10, z: 10}
+  dynamicObstaclePrefabs: []
+  obstaclePrefabs: []
   MasterPointCount: 0
   centerLine: {fileID: 1617712438}
   leftLine: {fileID: 1897725594}
@@ -1692,6 +1697,10 @@ MonoBehaviour:
   handlePrefab: {fileID: 1316276671998674219, guid: 713ea1dfe7794460a8bab1089c1db0cb, type: 3}
   samplesPerCurve: 400
   elevationOffset: 1
+  spawnPrefabs: []
+  prefabsPerLane: 1000
+  spawnScale: {x: 2, y: 2, z: 2}
+  spawnHeightOffset: 0.1
   drawDebugSplines: 1
   masterPoints: []
 --- !u!1 &1200493150
@@ -1929,6 +1938,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1339720899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1339720901}
+  - component: {fileID: 1339720900}
+  m_Layer: 0
+  m_Name: InputHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1339720900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339720899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18bb3204a2e245f082cf0e4c6bea897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceKeyboard: 0
+  logAxesOnce: 1
+  axisTopLeft: Axis 4
+  axisTopRight: Axis 5
+  axisBotLeft: Axis 6
+  axisBotRight: Axis 7
+  tareKg: 0
+  kgPerUnit: 50
+  smoothing: 0.25
+  forwardHeldThreshold: 0.2
+  sprintThreshold: 0.6
+  laneThreshold: 0.35
+  laneHysteresis: 0.15
+  laneCooldown: 0.35
+  jumpDropKg: 12
+  jumpMinPrevKg: 15
+  weightDeadzoneKg: 1
+--- !u!4 &1339720901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339720899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1694.8059, y: 82.82396, z: 308.55402}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1342194713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,15 +2596,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52275ad7009fa473b844d3806dcdf35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 1339720900}
   centerSplineContainer: {fileID: 294402095}
+  anim: {fileID: 476394474}
+  rb: {fileID: 476394473}
   segmentLength: 20
   baseSpeed: 10
   sprintMultiplier: 1.5
   laneSwitchSpeed: 4
   laneOffset: 20
   laneSwitchCooldown: 0.75
-  anim: {fileID: 476394474}
-  rb: {fileID: 476394473}
+  jumpForce: 30
+  gravity: 50
+  landingSource: {fileID: 0}
+  landingClip: {fileID: 0}
+  footstepSource: {fileID: 0}
+  footstepClips: []
+  stepDistance: 15
 --- !u!4 &1700665686
 Transform:
   m_ObjectHideFlags: 0
@@ -3536,3 +3614,4 @@ SceneRoots:
   - {fileID: 1825695213}
   - {fileID: 1282700667}
   - {fileID: 111623697}
+  - {fileID: 1339720901}
